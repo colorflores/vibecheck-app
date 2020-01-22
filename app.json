@@ -20,6 +20,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "packagerOpts": {
+      "assetExts": ["ttf"]
+    },
     "assetBundlePatterns": [
       "**/*"
     ],

@@ -1,6 +1,6 @@
 import React from 'react';
 import Landing from './components/Landing';
-import styles from './styles/styles';
+import appStyles from './App.styles';
 import { View } from 'react-native';
 
 export default class App extends React.Component {
@@ -15,7 +15,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.appContainer}>
+      <View style={appStyles.appContainer}>
         <Landing />
       </View>
     );
