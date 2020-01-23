@@ -1,13 +1,8 @@
 import { StyleSheet } from 'react-native';
-import colors from '../styles/colors';
+import colors from '../../styles/colors';
+import generalStyles from '../../styles/generalStyles';
 
 const landingStyles = StyleSheet.create({
-  titleText: {
-    // fontFamily: 'S',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    marginBottom: 40,
-  },
   landing: {
     backgroundColor: colors.yellow,
     flex: 1,
@@ -19,12 +14,15 @@ const landingStyles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     alignContent: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: '100%',
   },
   landingLogo: {
-    bottom: '1 rem',
-    right: '1 rem',
-    height: '0.5 rem'
+    position: 'absolute', 
+    bottom: 40, 
+    left: 10, 
+    height: 40, 
+    resizeMode: 'contain',
   }
 })
 
