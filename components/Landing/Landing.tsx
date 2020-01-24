@@ -30,7 +30,7 @@ export default class Landing extends React.Component {
           <Text style={[generalStyles.title, landingStyles.elementMargin]}>What's the story?</Text>
           <TextInput placeholder="I'm feeling lit" style={[generalStyles.queryText, landingStyles.elementMargin, landingStyles.queryBox]}>
           </TextInput>
-          <Image style={[landingStyles.playButtom, landingStyles.elementMargin]} source={playButton} />
+          <Image style={[landingStyles.playButton, landingStyles.elementMargin]} source={playButton} />
           <TouchableOpacity style={landingStyles.playlistButton}>
             <Text style={generalStyles.titleButton}>don't have one?</Text>
           </TouchableOpacity>

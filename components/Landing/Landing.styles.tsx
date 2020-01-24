@@ -25,11 +25,11 @@ const landingStyles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     color: colors.black,
-    width: 400,
+    width: '100%',
     textAlign: 'center',
   },
-  playButtom: {
-    height: 140,
+  playButton: {
+    height: '20%',
     resizeMode: 'contain',
   },
   landingContainer: {
@@ -37,7 +37,7 @@ const landingStyles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    width: '100%',
+    width: '80%',
   },
   elementMargin: {
     marginBottom: 60,

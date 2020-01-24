@@ -6,6 +6,7 @@ const generalStyles = StyleSheet.create({
     fontFamily: 'sail',
     fontStyle: 'normal',
     fontSize: 40,
+    color: colors.black,
   },
   titleButton: {
     fontFamily: 'sail',
@@ -20,21 +21,25 @@ const generalStyles = StyleSheet.create({
     color: colors.black,
     textAlign: 'left'
   },
+  menuText: {
+    fontFamily: 'worksans-light',
+    fontStyle: 'normal',
+    fontSize: 32,
+    color: colors.black,
+    textAlign: 'left'
+  },
   queryText: {
     fontFamily: 'worksans-regular',
     fontStyle: 'normal',
     fontSize: 28,
     color: colors.black,
   },
-  landingComponent: {
-    marginBottom: 10,
-  },
   bottomDarkLogo: {
     position: 'absolute', 
-    bottom: 10, 
-    right: 40,
-    height: 800, 
-    width: 180,
+    bottom: 30, 
+    right: 30,
+    height: 40, 
+    width: '30%',
     resizeMode: 'contain',
   },
   appContainer: {
