@@ -39,14 +39,6 @@ const landingStyles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
-  landingLogo: {
-    position: 'absolute', 
-    bottom: 10, 
-    right: 40,
-    height: 100, 
-    width: 200,
-    resizeMode: 'contain',
-  },
   elementMargin: {
     marginBottom: 60,
   }

@@ -29,6 +29,14 @@ const generalStyles = StyleSheet.create({
   landingComponent: {
     marginBottom: 10,
   },
+  bottomDarkLogo: {
+    position: 'absolute', 
+    bottom: 10, 
+    right: 40,
+    height: 800, 
+    width: 180,
+    resizeMode: 'contain',
+  },
   appContainer: {
     flex: 1,
     alignItems: 'stretch',
