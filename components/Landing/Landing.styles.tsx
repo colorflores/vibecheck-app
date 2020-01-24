@@ -25,6 +25,8 @@ const landingStyles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     color: colors.black,
+    width: 400,
+    textAlign: 'center',
   },
   playButtom: {
     height: 140,
