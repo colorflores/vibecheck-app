@@ -8,6 +8,12 @@ const generalStyles = StyleSheet.create({
     fontStyle: 'normal',
     fontSize: 40,
   },
+  titleButton: {
+    fontFamily: 'sail',
+    fontStyle: 'normal',
+    fontSize: 30,
+    color: colors.white,
+  },
   subtitle: {
 
   },
@@ -18,6 +24,9 @@ const generalStyles = StyleSheet.create({
     fontFamily: 'worksans-light',
     fontStyle: 'normal',
     fontSize: 30,
+    color: colors.black,
+    width: 400,
+    textAlign: 'center'
   },
   landingComponent: {
     marginBottom: 10,
