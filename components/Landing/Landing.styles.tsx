@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../styles/colors';
-import generalStyles from '../../styles/generalStyles';
 
 const landingStyles = StyleSheet.create({
   landing: {

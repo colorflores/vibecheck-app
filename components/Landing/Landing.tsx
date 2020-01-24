@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import landingStyles from './Landing.styles';
 import generalStyles from '../../styles/generalStyles';
 import landingLogo from '../../assets/img/app_dark_logo.png';

@@ -1,23 +1,21 @@
-import React from 'react';
 import Landing from './components/Landing/Landing';
-import generalStyles from './styles/generalStyles';
-import { View } from 'react-native';
+import TestNagivation from './components/TestNavigation';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
-export default class App extends React.Component {
-  constructor(props: object) {
-    super(props);
-    this.state = {
-      
-    }
-  }
+import { loadAsync } from 'expo-font';
 
-  // ?We do the spotify thing here
+loadAsync({
+  'sail': require('./assets/fonts/Sail.ttf'),
+  'worksans-regular': require('./assets/fonts/WorkSans-Regular.ttf'),
+  'worksans-light': require('./assets/fonts/WorkSans-Light.ttf')
+});
 
-  render() {
-    return (
-      <View style={generalStyles.appContainer}>
-        <Landing />
-      </View>
-    );
-  }
-}
+const Navigator = createStackNavigator({
+  Navigation: {screen: TestNagivation},
+  Landing: {screen: Landing},
+});
+
+const App = createAppContainer(Navigator);
+
+export default App;
