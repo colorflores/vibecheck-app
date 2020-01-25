@@ -61,5 +61,5 @@ typings/
 .next
 
 # expo directories
-.expo
+.expo/
 
