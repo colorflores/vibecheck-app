@@ -15,19 +15,19 @@ export default class TestNavigation extends React.Component {
           onPress={() => navigate('Profile')}
         />
         <Button
-          title="Profile Page"
+          title="Menu"
           onPress={() => navigate('Menu')}
         />
         <Button
-          title="Profile Page"
+          title="Vibecheck"
           onPress={() => navigate('Vibecheck')}
         />
         <Button
-          title="Profile Page"
+          title="Vibe recommendation"
           onPress={() => navigate('Vibe recommendation')}
         />
         <Button
-          title="Profile Page"
+          title="Loading"
           onPress={() => navigate('Loading')}
         />
       </View>
