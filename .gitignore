@@ -61,6 +61,6 @@ typings/
 .next
 
 # expo directories
-.expo/*
+.expo/*.json
 expo/
 
