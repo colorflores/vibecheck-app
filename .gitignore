@@ -62,5 +62,6 @@ typings/
 
 # expo directories
 .expo/*.json
-expo/
-
+.expo/
+/.expo/
+.expo
