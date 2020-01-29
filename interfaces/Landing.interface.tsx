@@ -1,8 +1,9 @@
 export interface LandingInterfaceProps {
-  // query: string,
+  navigation,
 }
 
 export interface LandingInterfaceState {
   placeHolder: string,
   query: string,
+  isActive: boolean,
 }
