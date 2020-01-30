@@ -6,9 +6,9 @@ import constants from '../../styles/constats';
 
 const songCardStyles = StyleSheet.create({
   songCardContainer: {
-    height: 120,
+    height: 110,
     flex: 1,
-    width: '80%',
+    width: '85%',
     flexDirection: 'row',
     alignContent: 'center',
     alignItems: 'flex-start',
@@ -19,7 +19,7 @@ const songCardStyles = StyleSheet.create({
   },
   songTitle: {
     fontFamily: 'worksans-regular',
-    fontSize: 18,
+    fontSize: 16,
     color: colors.black,
   },
   songArtist: {

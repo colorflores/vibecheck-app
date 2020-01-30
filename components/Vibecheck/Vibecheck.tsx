@@ -24,13 +24,19 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
           <View style={{ width: '80%', marginTop: 30, marginBottom: 30 }}>
             <TextInput style={[generalStyles.queryText, vibeCheckStyles.queryBox]} value={query} />
           </View>
-          {results.map((song) => (
-            (<SongCard
-              title={song.track_name} 
-              artist={song.artist_name} 
-              album={song.genre}
-            />)
-          ))}
+          <View style={{ width: '80%', marginTop: 20, marginBottom: 30}}>
+            <Text>Buttons go here</Text>
+          </View>
+          {(results && query) ? (
+            results.map((song) => (
+              (<SongCard
+                key={song.track_id}
+                title={song.track_name} 
+                artist={song.artist_name} 
+                album={song.genre}
+              />)
+            ))
+          ) : ''}
           <View style={vibeCheckStyles.bottomLine} />
         </View>
       </ScrollView>
