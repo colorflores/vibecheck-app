@@ -22,7 +22,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
       <ScrollView style={{ flex: 1, backgroundColor: colors.yellow }}>
         <View style={{ alignContent: 'center', flex: 1, flexDirection: 'column', alignItems: 'center' }}>
           <View style={{ width: '80%', marginTop: 30, marginBottom: 30 }}>
-            <TextInput style={[generalStyles.queryText, vibeCheckStyles.queryBox]} value={query} />
+            <TextInput style={[generalStyles.queryText, vibeCheckStyles.queryBox]} value={query} onChangeText={input => {this.setState({ query: input })}} />
           </View>
           <View style={{ width: '80%', marginTop: 20, marginBottom: 30}}>
             <Text>Buttons go here</Text>

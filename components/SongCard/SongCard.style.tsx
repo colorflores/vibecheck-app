@@ -13,8 +13,7 @@ const songCardStyles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'flex-start',
     marginBottom: 30,
-    backgroundColor: colors.white,
-    borderRadius: 10,
+    backgroundColor: 'transparent',
     overflow: 'hidden',
   },
   songTitle: {
