@@ -70,7 +70,7 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
     // ?Do some stuff with the query
 
     if (query !== '') {
-      navigate('Vibecheck', {query: query, results: {mockResult}})
+      navigate('Vibecheck', {query: query, results: {...mockResult}})
     }
 
   }
