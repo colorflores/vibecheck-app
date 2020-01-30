@@ -39,11 +39,13 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
           placeHolder: '',
         })
       } else {
-        if (currPlaceHolder > sampleQueries.length - 1) {
+        if (currPlaceHolder === sampleQueries.length - 1) {
           currPlaceHolder = 0;
+        } else {
+          currPlaceHolder++;
         }
         this.setState({
-          placeHolder: sampleQueries[currPlaceHolder++],
+          placeHolder: sampleQueries[currPlaceHolder],
         })
       }
     }, 1500)
