@@ -4,18 +4,28 @@ import { VibecheckInterfaceProps, VibecheckInterfaceState } from '../../interfac
 import vibeCheckStyles from './Vibecheck.styles';
 import generalStyles from '../../styles/generalStyles';
 
-export default class Vibecheck extends React.Component {
+export default class Vibecheck extends React.Component<VibecheckInterfaceProps, VibecheckInterfaceState> {
   constructor(props) {
     super(props);
     this.state = {
-
+      query: props.navigation.state.params.query,
+      results: props.navigation.state.params.results.songs,
     }
+    // console.log(this.state);
   }
 
   render() {
+    const { results } = this.state;
+
     return (
       <View>
-        <Text>Vibecheck yo</Text>
+        {results.map((song) => (
+          (<View>
+            <Text>
+              {song.track_name}
+            </Text>
+          </View>)
+        ))}
       </View>
     )
   }

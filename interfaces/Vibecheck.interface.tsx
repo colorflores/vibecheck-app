@@ -4,5 +4,5 @@ export interface VibecheckInterfaceProps {
 
 export interface VibecheckInterfaceState {
   query: string,
-  isActive: boolean,
+  results,
 }
