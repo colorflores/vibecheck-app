@@ -28,8 +28,11 @@ const landingStyles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
   },
+  playBox: {
+    height: '20%'
+  },
   playButton: {
-    height: '20%',
+    height: '100%',
     resizeMode: 'contain',
   },
   landingContainer: {
@@ -40,7 +43,7 @@ const landingStyles = StyleSheet.create({
     width: '80%',
   },
   elementMargin: {
-    marginBottom: 60,
+    marginBottom:55,
   }
 })
 
