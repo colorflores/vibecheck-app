@@ -2,27 +2,24 @@ import React from 'react';
 import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import test from '../../assets/img/test.jpg';
 import songCardStyles from './SongCard.style';
-import generalStyles from '../../styles/generalStyles';
 
-const SongCard = ({ title, artist, album, albumuri = test }) => (
+const SongCard = ({ title, artist, album, albumuri = test, controlURI }) => (
   <View style={songCardStyles.songCardContainer}>
-    <View style={{ width: songCardStyles.songCardContainer.height, height: songCardStyles.songCardContainer.height, alignItems: 'center' }}>
-      <Image style={{ height: '100%', resizeMode: 'contain', borderRadius: 10 }} source={albumuri} />
+    <View style={songCardStyles.albumContainer}>
+      <Image source={albumuri} style={songCardStyles.albumImage} />
     </View>
-    <View style={{ flex: 1, justifyContent: 'center', flexDirection: 'column', padding: 10 }}>
-      <View style={{ flex: 1, justifyContent: 'center', flexDirection: 'column' }}>
+    <View style={songCardStyles.songContainerOutter}>
+      <View style={songCardStyles.songContainerInner}>
         <Text style={songCardStyles.songTitle}>
-          {title} 
+          {title}
         </Text>
-        <View style={{ width: '100%', borderTopColor: 'white', borderTopWidth: 1, marginTop: 4, marginBottom: 4 }} />
-        <View style={{ width: '100%' }}>
-          <Text style={songCardStyles.songArtist}>
-            {artist}
-          </Text>
-          <Text style={songCardStyles.songAlbum}>
-            {album}
-          </Text>
-        </View>
+        <View style={songCardStyles.division} />
+        <Text style={songCardStyles.songArtist}>
+          {artist}
+        </Text>
+        <Text style={songCardStyles.songAlbum}>
+          {album}
+        </Text>
       </View>
     </View>
   </View>

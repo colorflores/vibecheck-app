@@ -31,7 +31,7 @@ const generalStyles = StyleSheet.create({
   queryText: {
     fontFamily: 'worksans-regular',
     fontStyle: 'normal',
-    fontSize: 24,
+    fontSize: 22,
     color: colors.black,
   },
   bottomDarkLogo: {
