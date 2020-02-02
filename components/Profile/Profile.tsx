@@ -1,39 +1,66 @@
 import React from 'react';
-import { Text, View, TextInput, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import profileStyles from './Profile.styles';
-import landingLogo from '../../assets/img/app_dark_logo.png';
-import profileLogo from '../../assets/img/icon_menu.png';
 import personLogo from '../../assets/img/profile_icon.png';
+import thumbs from '../../assets/img/100.png';
+import Menu from '../Menu/Menu';
 
+import { ProfileInterfaceProps, ProfileInterfaceState } from '../../interfaces/Profile.interface';
 
+const emptyState = {
+  vibeColors: ['#FFFFFF','#FFC300','#5187F0','#FF351A','#8600B6','#00cc00'], //White, yellow, blue,orange,purple, green
+  vibe: 0,
+  status: 'show'
+}
 
-export default class Profile extends React.Component {
-  constructor(props: object) {
+export default class Profile extends React.Component<ProfileInterfaceProps,ProfileInterfaceState> {
+  constructor(props) {
     super(props);
     this.state = {
-      query: '',
-    };
+      ...props,
+      ...emptyState
+    }
+  };
+
+  changeColor = () => {  
+    if(emptyState.vibe==5){ emptyState.vibe = -1;}
+
+    else{this.setState({ vibe: ++emptyState.vibe}) }
   }
 
-  updateText = () => {
-    // this.setState({
-    //   query: 'random'
-    // });
+  
+  hide = () => {  
+    if(this.state.status=='show'){this.setState({ status: 'none',})}
+    else{ this.setState({ status: 'show',})}
   }
-
-  checkVibe = () => {
-  }
-
+  
   render() {
+    const {vibe, vibeColors, status} = this.state;
     return (
-      <View style={profileStyles.profile}>
-        <View style={[profileStyles.profileContainer]}>
-            <Text style={profileStyles.text}>[Insert Name]'s Vibe</Text>  
+      <View style={{ flex: 1, alignContent: 'center', flexDirection: 'column' }}>
+        <Menu hideContent={this.hide} navigation/>
+        <View style={[profileStyles.profile, {display: status}]}>
+          <View style={[profileStyles.middleContainer]}>
+          <TouchableOpacity onPress={this.changeColor}>
+            <Image style={{width:200, height: 300, resizeMode: 'contain' }} source={personLogo} />
+            <Text style={[profileStyles.text,{color:vibeColors[vibe]}]}> Nathan's Vibe </Text>  
+          </TouchableOpacity>
+          </View>
+          <View style={[profileStyles.lowerContainer]}>
+            <View style={profileStyles.elementMargin}>
+              <Image style={{width:50, height: 50, resizeMode: 'contain' }} source={thumbs} />
+              <Image style={{width:50, height: 50, resizeMode: 'contain' }} source={thumbs} />
+            </View>
+            <View style={profileStyles.elementMargin}>
+              <Image style={{width:50, height: 50, resizeMode: 'contain' }} source={thumbs} />
+              <Image style={{width:50, height: 50, resizeMode: 'contain' }} source={thumbs} />
+            </View>
+            <View style={profileStyles.elementMargin}>
+              <Image style={{width:50, height: 50, resizeMode: 'contain' }} source={thumbs} />
+              <Image style={{width:50, height: 50, resizeMode: 'contain' }} source={thumbs} />
+            </View>
+          </View>
         </View>
-        <Text style={profileStyles.text}>[Insert Vibes Above]</Text>
-        <Image style={{ position: 'absolute', bottom: 80, width:200, height: 1000, resizeMode: 'contain' }} source={landingLogo} />
-        <Image style={{ position: 'absolute', bottom: 80, width:50, height: 1000, right: 0, resizeMode: 'contain' }} source={profileLogo} />
-        <Image style={{ position: 'absolute', width:200, height: 350, right: 80, resizeMode: 'contain' }} source={personLogo} />
       </View>
     );
   }

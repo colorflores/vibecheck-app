@@ -10,6 +10,14 @@ const menuStyles = StyleSheet.create({
     alignItems: 'flex-start',
     padding: 20
   },
+  dotStyle:{
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+    height: 30,
+    resizeMode: 'contain'
+  },
   menuActive: {
     backgroundColor: colors.black,
     flex: 1,
@@ -22,6 +30,7 @@ const menuStyles = StyleSheet.create({
     flexDirection: 'row', 
     height: 80,
     alignItems: 'center',
+    position: 'absolute'
   },
   upperActive: {
     flex: 0.1, 
@@ -32,83 +41,35 @@ const menuStyles = StyleSheet.create({
   body: {
     flex: 0.9, 
     flexDirection: 'column', 
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    marginTop: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+    padding: 40,
   },
-  option:{
-    padding: 5,
-    left: 50,
-    height: 50,
-    width: 500,  
-    bottom: 10,
-    borderRadius:300,
-    backgroundColor: colors.black
-  },
-  circle1:{
-    padding: 13,
-    height: 50,
-    width: 50, 
-    right: 150, 
-    borderRadius:300,
-    backgroundColor: colors.yellow
-  },
-  circle2:{
-    padding: 13,
-    height: 50,
-    width: 50, 
-    right: 150, 
-    borderRadius:300,
-    backgroundColor: colors.blue
-  },
-  circle3:{
-    padding: 13,
-    height: 50,
-    width: 50,  
-    right: 150, 
-    borderRadius:300,
-    backgroundColor: colors.green
-  },
-  circle4:{
-    padding: 13,
-    height: 50,
-    width: 50, 
-    right: 150, 
-    borderRadius:300,
-    backgroundColor: colors.white
-  },
-  circle5:{
-    padding: 13,
-    height: 50,
-    width: 50, 
-    right: 150, 
-    borderRadius:300,
-    backgroundColor: colors.purple
-  },
-  circle6:{
-    padding: 13,
-    height: 50,
-    width: 50, 
-    right: 150, 
-    borderRadius:300,
-    backgroundColor: colors.orange
+  option: {
+    flexDirection: 'row', 
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+    position: 'absolute',
   },
   text: {
     fontFamily: 'worksans-regular',
     fontStyle: 'normal',
     fontSize: 25,
     color: colors.white,
-    textAlign: 'left'
+    textAlign: 'center',
+    left: 20
   },
   menuContainer: {
+    width: '85%',
     backgroundColor: colors.black,
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    width: '80%',
   },
   elementMargin: {
-    marginBottom: 15,
+    marginBottom: 70,
   }
 })
 
