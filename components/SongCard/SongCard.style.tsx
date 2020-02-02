@@ -56,7 +56,7 @@ const songCardStyles = StyleSheet.create({
   division: {
     width: '100%',
     borderTopColor: 'white',
-    borderTopWidth: 1,
+    borderTopWidth: 2,
     marginTop: 4,
     marginBottom: 4
   }

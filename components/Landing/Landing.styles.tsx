@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../styles/colors';
 import constants from '../../styles/constats';
+import generalStyles from '../../styles/generalStyles';
 
 const landingStyles = StyleSheet.create({
   landing: {
@@ -43,7 +44,7 @@ const landingStyles = StyleSheet.create({
     width: '90%',
   },
   elementMargin: {
-    marginBottom:55,
+    marginBottom: 55,
   }
 })
 
