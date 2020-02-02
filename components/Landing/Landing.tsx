@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TextInput, TouchableOpacity, Image, TouchableHighlightBase } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import { LandingInterfaceProps, LandingInterfaceState } from '../../interfaces/Landing.interface';
 import landingStyles from './Landing.styles';
 import generalStyles from '../../styles/generalStyles';

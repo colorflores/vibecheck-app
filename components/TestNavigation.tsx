@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Button, View } from 'react-native';
+import { Button, View } from 'react-native';
 
 export default class TestNavigation extends React.Component {
   render() {
