@@ -65,3 +65,6 @@ typings/
 .expo/
 /.expo/
 .expo
+
+# spotify auth content
+secret.js
