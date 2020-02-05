@@ -4,6 +4,7 @@ import { LoadingInterfaceProps, LoadingInterfaceState } from '../../interfaces/L
 import generalStyles from '../../styles/generalStyles';
 import LoadingStyles from './Loading.styles';
 import { getAuthCode } from '../../util/Spotify.util';
+import { saveData, getData } from '../../util/Storage.util';
 
 export default class Loading extends React.Component <LoadingInterfaceProps, LoadingInterfaceState> {
   constructor(props) {
@@ -13,15 +14,22 @@ export default class Loading extends React.Component <LoadingInterfaceProps, Loa
     };
   }
 
-  handleLogin = () => {
-    const tempCode = getAuthCode();
-    console.log(tempCode);
+  handleLogin = async () => {
+    // const tempCode = getAuthCode();
+    // console.log(tempCode);
+    await saveData();
+  }
+
+  recapData = async () => {
+    const resData = await getData();
+    // console.log(resData); 
   }
 
   render() {
     return (
       <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
         <Button title="Log in" onPress={click => this.handleLogin()}/>
+        <Button title="get data" onPress={click => this.recapData()} />
       </View>
     );
   }

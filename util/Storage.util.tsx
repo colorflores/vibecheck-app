@@ -11,11 +11,12 @@ export const saveData = async () => {
 
 export const getData = async () => {
   try {
-
-  } catch (error) {
     const value = await AsyncStorage.getItem('TEST_ITEM');
     if (value) {
       console.log(value);
+      return Promise.resolve(value);
     }
+  } catch (error) {
+    console.log(error);
   }
 }
