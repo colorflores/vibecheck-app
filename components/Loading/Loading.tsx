@@ -1,10 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import { View, TextInput, TouchableOpacity, Image, ScrollView, Button } from 'react-native';
 import { LoadingInterfaceProps, LoadingInterfaceState } from '../../interfaces/Loading.interface';
 import generalStyles from '../../styles/generalStyles';
 import LoadingStyles from './Loading.styles';
-import { getAuthorizationCode } from '../../util/Spotify.util';
+import { getAuthCode } from '../../util/Spotify.util';
 
 export default class Loading extends React.Component <LoadingInterfaceProps, LoadingInterfaceState> {
   constructor(props) {
@@ -15,7 +14,7 @@ export default class Loading extends React.Component <LoadingInterfaceProps, Loa
   }
 
   handleLogin = () => {
-    const tempCode = getAuthorizationCode();
+    const tempCode = getAuthCode();
     console.log(tempCode);
   }
 
