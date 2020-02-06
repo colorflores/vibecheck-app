@@ -1,20 +1,19 @@
 import { AsyncStorage } from 'react-native';
 
-// ?Saving tokens to the device
-export const saveData = async () => {
+export const saveData = async (key: string, value: string) => {
   try {
-    await AsyncStorage.setItem('TEST_ITEM', 'check this out');
+    await AsyncStorage.setItem(key, value);
   } catch (error) {
+    console.log(`Error saving ${key} token`);
     console.log(error);
   }
 }
 
-export const getData = async () => {
+export const getData = async (key: string) => {
   try {
-    const value = await AsyncStorage.getItem('TEST_ITEM');
-    if (value) {
-      console.log(value);
-      return Promise.resolve(value);
+    const data = await AsyncStorage.getItem(key);
+    if (data) {
+      return data;
     }
   } catch (error) {
     console.log(error);

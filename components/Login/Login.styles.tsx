@@ -4,8 +4,8 @@ import {
 import colors from '../../styles/colors';
 import constants from '../../styles/constats';
 
-const LoadingStyles = StyleSheet.create({
+const LoginStyles = StyleSheet.create({
   
 });
 
-export default LoadingStyles;
+export default LoginStyles;
