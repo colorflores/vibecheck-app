@@ -41,7 +41,7 @@ const landingStyles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    width: '90%',
+    width: '85%',
   },
   elementMargin: {
     marginBottom: 55,
