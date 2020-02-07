@@ -2,12 +2,11 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { LoginInterfaceProps, LoginInterfaceState } from '../../interfaces/Login.interface';
 import generalStyles from '../../styles/generalStyles';
-import LoginStyles from './Login.styles';
-import { getAuthCode } from '../../util/Spotify.util';
+import loginStyles from './Login.styles';
 import loginLogo from '../../assets/img/login_logo.png'
-import landingLogo from '../../assets/img/app_dark_logo.png';
-import constants from '../../styles/constats';
-import colors from '../../styles/colors';
+import bottomLogo from '../../assets/img/app_dark_logo.png';
+import { getAuthTokens, getAuthCode } from '../../util/Spotify.util';
+import { getData } from '../../util/Storage.util';
 
 export default class Login extends React.Component <LoginInterfaceProps, LoginInterfaceState> {
   constructor(props) {
@@ -18,22 +17,24 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
   }
 
   handleLogin = async () => {
-    const tempCode = getAuthCode();
-    console.log(tempCode);
+    const testCode = await getAuthTokens();
+    // const testToken = await getData('ACCESS_TOKEN');
+    // console.log(testToken);
+    // console.log(testCode)
   }
 
   render() {
     return (
-      <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', alignContent: 'center', backgroundColor: colors.black }}>
-        <View style={{ flex: 1, width: '85%', flexDirection: 'column', alignItems: 'center', alignContent: 'center', justifyContent: 'center'  }}>
-          <Image style={{ width: 260, height: 260 , resizeMode: 'contain', marginBottom: 25 }} source={loginLogo}/>
-          <TouchableOpacity onPress={this.handleLogin} style={{ borderColor: colors.green, borderWidth: constants.borderWidth, paddingTop: 10, paddingBottom: 10, paddingRight: 20, paddingLeft: 20 }}>
-            <Text style={[generalStyles.queryText, { color: colors.white }]}>
+      <View style={loginStyles.loginContainerOuter}>
+        <View style={loginStyles.loginContainerInner}>
+          <Image style={loginStyles.loginLogo} source={loginLogo}/>
+          <TouchableOpacity onPress={this.handleLogin} style={loginStyles.loginButton}>
+            <Text style={[generalStyles.queryText, loginStyles.loginText]}>
               Log in with Spotify
             </Text>
           </TouchableOpacity>
         </View>
-        <Image style={generalStyles.bottomDarkLogo} source={landingLogo} />
+        <Image style={generalStyles.bottomDarkLogo} source={bottomLogo} />
       </View>
     );
   }

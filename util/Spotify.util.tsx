@@ -1,10 +1,13 @@
 import { AuthSession } from 'expo';
 import axios from 'axios';
+import { encode  } from 'base-64';
 import spotifyCredentials from '../secret';
 import { saveData, getData } from './Storage.util';
 
 const spotifyURL = 'https://accounts.spotify.com/authorize';
 const spotifyAPI_URL = 'https://accounts.spotify.com/api/token';
+
+globalThis.btoa = encode;
 
 const spotifyScopes = [
   'user-modify-playback-state', 
@@ -40,16 +43,25 @@ export const getAuthCode = async () => {
 export const getAuthTokens = async () => {
   try {
     const authorizationCode = await getAuthCode();
-    const encodedCredentials = btoa(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
-    const reqConfig = {
-      headers: {
-        Authorization: `Basic ${encodedCredentials}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: `grant_type=authorization_code&code=${authorizationCode}&redirect_uri=${spotifyCredentials.redirectUri}`
-    }
+    const encodedCredentials = encode(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
 
-    const response = await axios.post(spotifyAPI_URL, reqConfig).then((res) => Promise.resolve(res.data));
+    const response = await axios({
+      method: 'post',
+      url: spotifyAPI_URL,
+      params: {
+        grant_type: 'client_credentials',
+      },
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Basic ${encodedCredentials}`,
+        grant_type :'authorization_code',
+      },
+      auth: {
+        username: spotifyCredentials.clientId,
+        password: spotifyCredentials.clientSecret,
+      },
+    }).then((res) => Promise.resolve(res.data));
 
     const {
       access_token,
@@ -64,13 +76,14 @@ export const getAuthTokens = async () => {
     await saveData('EXPIRY_TIME', expiryTime.toString());
 
   } catch (err) {
+    console.log(`Error getting auth tokens`);
     console.log(err);
   }
 }
 
 export const refreshAuthTokens = async () => {
   try {
-    const encodedCredentials = btoa(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
+    const encodedCredentials = encode(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
     const currRefreshToken = await getData('REFRESH_TOKEN');
     
     if (currRefreshToken) {
