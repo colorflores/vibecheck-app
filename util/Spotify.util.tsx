@@ -1,5 +1,4 @@
 import { AuthSession } from 'expo';
-import axios from 'axios';
 import { encode  } from 'base-64';
 import spotifyCredentials from '../secret';
 import { saveData, getData } from './Storage.util';
@@ -44,8 +43,7 @@ export const getAuthTokens = async () => {
   try {
     const authorizationCode = await getAuthCode();
     const encodedCredentials = encode(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
-
-    const response = await fetch(spotifyAPI_URL, {
+    const reqConfig = {
       method: 'POST',
       headers: {
         Authorization: `Basic ${encodedCredentials}`,
@@ -54,16 +52,17 @@ export const getAuthTokens = async () => {
       body: `grant_type=authorization_code&code=${authorizationCode}&redirect_uri=${
         spotifyCredentials.redirectUri
       }`,
-    });
-    
-    const res = await response.json();
-    console.log(res);
+    }
 
+    const response = await fetch(spotifyAPI_URL, reqConfig).then(async (res) => {
+      return await res.json();
+    })
+    
     const {
       access_token,
       refresh_token,
       expires_in,
-    } = res;
+    } = response;
 
     const expiryTime = getExpiryTime(expires_in);
     
@@ -84,6 +83,7 @@ export const refreshAuthTokens = async () => {
     
     if (currRefreshToken) {
       const reqConfig = {
+        method: 'post',
         headers: {
           Authorization: `Basic ${encodedCredentials}`,
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -91,7 +91,9 @@ export const refreshAuthTokens = async () => {
         body: `grant_type=refresh_token&refresh_token=${currRefreshToken}`,
       }
   
-      const response = await axios.post(spotifyAPI_URL, reqConfig).then((res) => Promise.resolve(res.data));
+      const response = await fetch(spotifyAPI_URL, reqConfig).then(async (res) => {
+        return await res.json();
+      });
       
       const {
         access_token,

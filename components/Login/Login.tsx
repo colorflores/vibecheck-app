@@ -19,7 +19,7 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
   handleLogin = async () => {
     await getAuthTokens();
     const testToken = await getData('ACCESS_TOKEN');
-    // console.log(testToken);
+    console.log(testToken);
     // console.log(testCode)
   }
 
