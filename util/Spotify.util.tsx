@@ -45,29 +45,25 @@ export const getAuthTokens = async () => {
     const authorizationCode = await getAuthCode();
     const encodedCredentials = encode(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
 
-    const response = await axios({
-      method: 'post',
-      url: spotifyAPI_URL,
-      params: {
-        grant_type: 'client_credentials',
-      },
+    const response = await fetch(spotifyAPI_URL, {
+      method: 'POST',
       headers: {
-        'Accept': 'application/json',
+        Authorization: `Basic ${encodedCredentials}`,
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Basic ${encodedCredentials}`,
-        grant_type :'authorization_code',
       },
-      auth: {
-        username: spotifyCredentials.clientId,
-        password: spotifyCredentials.clientSecret,
-      },
-    }).then((res) => Promise.resolve(res.data));
+      body: `grant_type=authorization_code&code=${authorizationCode}&redirect_uri=${
+        spotifyCredentials.redirectUri
+      }`,
+    });
+    
+    const res = await response.json();
+    console.log(res);
 
     const {
       access_token,
       refresh_token,
       expires_in,
-    } = response;
+    } = res;
 
     const expiryTime = getExpiryTime(expires_in);
     
