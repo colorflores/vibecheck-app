@@ -22,7 +22,7 @@ const emptyState = {
 
 const menuItem = (navFunction, target, dotSrc, text) => (
   <View style={menuStyles.elementMargin}>
-    <TouchableOpacity onPressIn={() => navFunction('Profile')} style={menuStyles.option}>
+    <TouchableOpacity onPressIn={() => navFunction(target)} style={menuStyles.option}>
       <Image style={menuStyles.dotStyle} source={dotSrc} />
       <Text style={menuStyles.text}>{text}</Text>
     </TouchableOpacity>
@@ -30,17 +30,17 @@ const menuItem = (navFunction, target, dotSrc, text) => (
 )
 
 const menuItems = {
-  'vibecheck': yellowDot,
-  'Playlist check': whiteDot,
-  'Your playlists': blackDot,
-  'Your profile': blueDot,
-  'About us': purpleDot,
-  'Log out': orangeDot,
+  'vibecheck': [yellowDot,'vibecheck'],
+  'Playlist check': [whiteDot,'PlaylistCheck'],
+  'Your playlists': [blackDot,'Playlists'],
+  'Your profile': [blueDot,'Profile'],
+  'About us': [purpleDot,'About'],
+  'Log out': [orangeDot,'LogOut']
 };
 
 Animated.timing(emptyState.animation, {
   toValue : 1,
-  duration : 6000
+  duration : 1000
 }).start();
 
 if(emptyState.showDropBox==true){ emptyState.animation.setValue(0)}
@@ -73,6 +73,7 @@ export default class Menu extends React.Component<MenuInterfaceProps,MenuInterfa
     const {animation} = this.state;
     return (
       <View style={menuStyles.menuActive}>
+
         <View style={menuStyles.upperActive}>
           <TouchableOpacity onPressIn={this.changeContent}>
             <Image style={{ width:50, resizeMode: 'contain' }} source={burger} />
@@ -80,17 +81,16 @@ export default class Menu extends React.Component<MenuInterfaceProps,MenuInterfa
           <Image style={{ width:180, resizeMode: 'contain' }} source={menuLogo} />
           <Image style={{ position: 'absolute', width:45, resizeMode: 'contain', left: 270}} source={menuIcon} />
         </View>
+
            {showDropBox? <Animated.View style={[{opacity: animation}, menuStyles.body]}>
             <View style={menuStyles.menuContainer}>
               {Object.keys(menuItems).map((currItem) => (
-                menuItem(navigate, 'Profile', menuItems[currItem], currItem) // replaces profile with currItem for unique page
+                menuItem(navigate, menuItems[currItem][1], menuItems[currItem][0], currItem)
               ))}
             </View>
-          </Animated.View> : null }                                                
+          </Animated.View> : null }  
+
     </View>
     );
   }
 }
-
-
-

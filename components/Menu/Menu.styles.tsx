@@ -23,14 +23,13 @@ const menuStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'flex-start',
-    padding: 20
+    padding: 20,
   },
   upper: {
     flex: 1, 
     flexDirection: 'row', 
     height: 80,
     alignItems: 'center',
-    position: 'absolute'
   },
   upperActive: {
     flex: 0.1, 
@@ -44,7 +43,7 @@ const menuStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignContent: 'center',
-    padding: 40,
+    left: 30,
   },
   option: {
     flexDirection: 'row', 
@@ -59,7 +58,7 @@ const menuStyles = StyleSheet.create({
     fontSize: 25,
     color: colors.white,
     textAlign: 'center',
-    left: 20
+    left: 20,
   },
   menuContainer: {
     width: '85%',
@@ -67,6 +66,7 @@ const menuStyles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
+    position: 'absolute',
   },
   elementMargin: {
     marginBottom: 70,
