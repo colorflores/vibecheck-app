@@ -3,5 +3,5 @@ export interface LoginInterfaceProps {
 }
 
 export interface LoginInterfaceState {
-
+  accessTokenStatus: boolean
 }

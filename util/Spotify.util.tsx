@@ -68,7 +68,7 @@ export const getAuthTokens = async () => {
     
     await saveData('ACCESS_TOKEN', access_token);
     await saveData('REFRESH_TOKEN', refresh_token);
-    await saveData('EXPIRY_TIME', expiryTime.toString());
+    await saveData('EXPIRY_TIME', JSON.stringify(expiryTime));
 
   } catch (err) {
     console.log(`Error getting auth tokens`);
