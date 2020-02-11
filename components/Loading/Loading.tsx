@@ -4,14 +4,15 @@ import loadingStyles from './Loading.styles';
 import splashLogo from '../../assets/img/app_dark_logo.png';
 import loadingLogo from '../../assets/img/loading_logo.png';
 import generalStyles from '../../styles/generalStyles';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-
+import { loadAsync } from 'expo-font';
+import { LoadingInterfaceProps, LoadingInterfaceState } from '../../interfaces/Loading.interface';
+import { getData } from '../../util/Storage.util';
+import { refreshAuthTokens } from '../../util/Spotify.util';
 
 const emptyState = {
-  showDropBox: false,
   spinValue: new Animated.Value(0),
-  colorNumber: new Animated.Value(0)
-
+  colorNumber: new Animated.Value(0),
+  isReady: false
 }
 
 Animated.loop( Animated.timing(emptyState.spinValue, {
@@ -35,8 +36,15 @@ const color = emptyState.colorNumber.interpolate({
   outputRange: ['#FFFFFF','#000000']
 });
 
+const wait = async (time) => (
+  new Promise((resolve) => {
+    setTimeout(() => {
+      return resolve('');
+    }, time);
+  })
+)
 
-export default class Profile extends React.Component {
+export default class Profile extends React.Component <LoadingInterfaceProps, LoadingInterfaceState> {
   constructor(props: object) {
     super(props);
     this.state = {
@@ -44,16 +52,49 @@ export default class Profile extends React.Component {
     };
   }
 
+  async componentDidMount() {
+    const { navigate } = this.props.navigation;
+
+    await loadAsync({
+      'sail': require('../../assets/fonts/Sail.ttf'),
+      'worksans-regular': require('../../assets/fonts/WorkSans-Regular.ttf'),
+      'worksans-light': require('../../assets/fonts/WorkSans-Light.ttf')
+    });
+
+    this.setState({
+      isReady: true,
+    })
+
+    await wait(2000);
+
+    const currentTokenTime = await getData('EXPIRY_TIME');
+    const currentDate = new Date().getTime();
+
+    if (currentTokenTime) {
+      if (JSON.parse(currentTokenTime) < currentDate) {
+        await refreshAuthTokens();
+        navigate('Landing');
+      } else {
+        navigate('Landing');
+      }
+    } else {
+      navigate('Login');
+    }
+  }
+
   render() {
+    const { isReady } = this.state;
+
     return (
-      <View style={loadingStyles.loading}>
-        <View style={loadingStyles.loadingContainer}>
-          <Animated.Image style={[{transform:[{rotate: spin}]},{ height: 200, resizeMode: 'contain'}, loadingStyles.elementMargin]} source={loadingLogo} />
-          <Animated.Text style={[loadingStyles.title,{color:color}]}> Signing you in...</Animated.Text>
+      (isReady === true ? (
+        <View style={loadingStyles.loading}>
+          <View style={loadingStyles.loadingContainer}>
+            <Animated.Image style={[{transform:[{rotate: spin}]},{ height: 200, resizeMode: 'contain'}, loadingStyles.elementMargin]} source={loadingLogo} />
+            <Animated.Text style={[loadingStyles.title,{color:color}]}> Signing you in...</Animated.Text>
+          </View>
+          <Image style={generalStyles.bottomDarkLogo} source={splashLogo} />
         </View>
-        <Image style={generalStyles.bottomDarkLogo} source={splashLogo} />
-      </View>
-      
+      ) : null)
     );
   }
 }
