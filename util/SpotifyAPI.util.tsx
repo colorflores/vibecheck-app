@@ -3,7 +3,7 @@ import Spotify from 'spotify-web-api-js';
 
 const s = new Spotify();
 
-export const initialize = (token: string) => {
+export const initializeAPI = (token: string) => {
   s.setAccessToken(token);
 }
 

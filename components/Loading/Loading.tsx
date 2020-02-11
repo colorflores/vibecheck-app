@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image, Animated, Easing } from 'react-native';
+import { View, Image, Animated, Easing } from 'react-native';
 import loadingStyles from './Loading.styles';
 import splashLogo from '../../assets/img/app_dark_logo.png';
 import loadingLogo from '../../assets/img/loading_logo.png';
