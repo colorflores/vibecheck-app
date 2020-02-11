@@ -30,6 +30,10 @@ export default class TestNavigation extends React.Component {
           title="Loading"
           onPress={() => navigate('Loading')}
         />
+        <Button
+          title="Login"
+          onPress={() => navigate('Login')}
+        />
       </View>
     );
   }

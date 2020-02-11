@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, Image,TouchableOpacity, Animated } from 'react-native';
+import { Text, View, Image,TouchableOpacity, Animated } from 'react-native';
 import menuStyles from './Menu.styles';
 import menuLogo from '../../assets/img/app_dark_logo.png';
 import burger from '../../assets/img/menu.png';
@@ -11,7 +11,6 @@ import blueDot from '../../assets/img/bluedot.png';
 import blackDot from '../../assets/img/blackdot.png';
 import orangeDot from '../../assets/img/orangedot.png';
 
-
 import { MenuInterfaceProps, MenuInterfaceState } from '../../interfaces/Menu.Interface';
 
 const emptyState = {
@@ -21,7 +20,7 @@ const emptyState = {
 }
 
 const menuItem = (navFunction, target, dotSrc, text) => (
-  <View style={menuStyles.elementMargin}>
+  <View style={menuStyles.elementMargin} key={`${text}-id`}>
     <TouchableOpacity onPressIn={() => navFunction(target)} style={menuStyles.option}>
       <Image style={menuStyles.dotStyle} source={dotSrc} />
       <Text style={menuStyles.text}>{text}</Text>
@@ -30,7 +29,7 @@ const menuItem = (navFunction, target, dotSrc, text) => (
 )
 
 const menuItems = {
-  'vibecheck': [yellowDot,'vibecheck'],
+  'Vibecheck': [yellowDot, 'Vibecheck'],
   'Playlist check': [whiteDot,'PlaylistCheck'],
   'Your playlists': [blackDot,'Playlists'],
   'Your profile': [blueDot,'Profile'],
@@ -44,7 +43,6 @@ Animated.timing(emptyState.animation, {
 }).start();
 
 if(emptyState.showDropBox==true){ emptyState.animation.setValue(0)}
-
 
 export default class Menu extends React.Component<MenuInterfaceProps,MenuInterfaceState> {
   constructor(props) {
@@ -68,19 +66,20 @@ export default class Menu extends React.Component<MenuInterfaceProps,MenuInterfa
   }
 
   render() {
-    const {navigate} = this.props.navigation;
-    const {showDropBox} = this.state;
-    const {animation} = this.state;
+    const { showDropBox, animation } = this.state;
+    const { navigate } = this.props.navigation;
+
     return (
       <View style={menuStyles.menuActive}>
-
-        <View style={menuStyles.upperActive}>
-          <TouchableOpacity onPressIn={this.changeContent}>
-            <Image style={{ width:50, resizeMode: 'contain' }} source={burger} />
-          </TouchableOpacity>
-          <Image style={{ width:180, resizeMode: 'contain' }} source={menuLogo} />
-          <Image style={{ position: 'absolute', width:45, resizeMode: 'contain', left: 270}} source={menuIcon} />
-        </View>
+          <View style={menuStyles.upperActive}>
+            <TouchableOpacity onPressIn={this.changeContent}>
+              <Image style={{ width:50, resizeMode: 'contain' }} source={burger} />
+            </TouchableOpacity>
+            <Image style={{ width:180, resizeMode: 'contain' }} source={menuLogo} />
+            <View style={{ alignItems: 'flex-end', alignContent: 'flex-end', flex: 1 }}>
+              <Image style={{ width: 45, height: 45, resizeMode: 'contain' }} source={menuIcon} />
+            </View>
+          </View>
 
            {showDropBox? <Animated.View style={[{opacity: animation}, menuStyles.body]}>
             <View style={menuStyles.menuContainer}>

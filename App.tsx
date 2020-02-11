@@ -4,6 +4,7 @@ import Menu from './components/Menu/Menu';
 import Loading from './components/Loading/Loading';
 import TestNagivation from './components/TestNavigation';
 import Vibecheck from './components/Vibecheck/Vibecheck';
+import Login from './components/Login/Login';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import { loadAsync } from 'expo-font';
@@ -17,10 +18,11 @@ loadAsync({
 const Navigator = createStackNavigator({
   Navigation: {screen: TestNagivation},
   Landing: {screen: Landing},
+  Vibecheck: {screen: Vibecheck},
+  Login: {screen: Login},
   Menu: {screen: Menu},
   Loading: {screen: Loading},
   Profile: {screen: Profile},
-  Vibecheck: {screen: Vibecheck}
 });
 
 const App = createAppContainer(Navigator);
