@@ -5,8 +5,16 @@ import generalStyles from '../../styles/generalStyles';
 import loginStyles from './Login.styles';
 import loginLogo from '../../assets/img/login_logo.png'
 import bottomLogo from '../../assets/img/app_dark_logo.png';
-import { getAuthTokens, refreshAuthTokens } from '../../util/Spotify.util';
+import { getAuthTokens } from '../../util/Spotify.util';
 import { getData } from '../../util/Storage.util';
+
+const wait = async (time) => (
+  new Promise((resolve) => {
+    setTimeout(() => {
+      return resolve('');
+    }, time);
+  })
+)
 
 export default class Login extends React.Component <LoginInterfaceProps, LoginInterfaceState> {
   constructor(props) {
@@ -17,22 +25,16 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
   }
 
   handleLogin = async () => {
+    const { navigate } = this.props.navigation
+
     await getAuthTokens();
     const testToken = await getData('ACCESS_TOKEN');
     console.log(testToken);
-    // console.log(testCode)
-  }
 
-  async componentDidMount () {
-    const currentTokenTime = JSON.parse(await getData('EXPIRY_TIME'));
-    const currentDate = new Date().getTime();
+    await wait(2000);
 
-    if (!currentTokenTime || currentTokenTime < currentDate) {
-      await refreshAuthTokens();
-    } else {
-      this.setState({
-        accessTokenStatus: true,
-      });
+    if (testToken) {
+      navigate('Landing');
     }
   }
 
