@@ -1,3 +1,4 @@
+import { Platform, StatusBar } from 'react-native';
 import Landing from './components/Landing/Landing';
 import Profile from './components/Profile/Profile';
 import Menu from './components/Menu/Menu';
@@ -9,13 +10,41 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 const Navigator = createStackNavigator({
   Loading: {screen: Loading, navigationOptions: {
-    headerBackTitle: 'some label'
+    headerShown: false,
+    cardStyle: {
+      paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+    }
   }},
-  Landing: {screen: Landing},
-  Vibecheck: {screen: Vibecheck},
-  Login: {screen: Login},
-  Menu: {screen: Menu},
-  Profile: {screen: Profile},
+  Landing: {screen: Landing, navigationOptions: {
+    headerShown: false,
+    cardStyle: {
+      paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+    }
+  }},
+  Vibecheck: {screen: Vibecheck, navigationOptions: {
+    headerShown: false,
+    cardStyle: {
+      paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+    }
+  }},
+  Login: {screen: Login, navigationOptions: {
+    headerShown: false,
+    cardStyle: {
+      paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+    }
+  }},
+  Menu: {screen: Menu, navigationOptions: {
+    headerShown: false,
+    cardStyle: {
+      paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+    }
+  }},
+  Profile: {screen: Profile, navigationOptions: {
+    headerShown: false,
+    cardStyle: {
+      paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+    }
+  }},
 });
 
 const App = createAppContainer(Navigator);

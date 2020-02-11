@@ -81,33 +81,32 @@ export const refreshAuthTokens = async () => {
     const encodedCredentials = encode(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
     const currRefreshToken = await getData('REFRESH_TOKEN');
     
-    if (currRefreshToken) {
-      const reqConfig = {
-        method: 'post',
-        headers: {
-          Authorization: `Basic ${encodedCredentials}`,
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `grant_type=refresh_token&refresh_token=${currRefreshToken}`,
-      }
-  
-      const response = await fetch(spotifyAPI_URL, reqConfig).then(async (res) => {
-        return await res.json();
-      });
-      
-      const {
-        access_token,
-        refresh_token,
-        expires_in,
-      } = response;
-
-      await saveData('ACCESS_TOKEN', access_token);
-      if (refresh_token) { await saveData('REFRESH_TOKEN', refresh_token); };
-      await saveData('EXPIRY_TIME', expires_in.toString());
-
-    } else {
-      await getAuthTokens();
+    const reqConfig = {
+      method: 'post',
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `grant_type=refresh_token&refresh_token=${currRefreshToken}`,
     }
+
+    const response = await fetch(spotifyAPI_URL, reqConfig).then(async (res) => {
+      return await res.json();
+    });
+    
+    const {
+      access_token,
+      refresh_token,
+      expires_in,
+    } = response;
+
+    await saveData('ACCESS_TOKEN', access_token);
+    
+    if (refresh_token) { 
+      await saveData('REFRESH_TOKEN', refresh_token); 
+    };
+
+    await saveData('EXPIRY_TIME', expires_in.toString());
   } catch (error) {
     console.log(error);
   }
