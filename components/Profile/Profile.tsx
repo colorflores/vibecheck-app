@@ -10,7 +10,7 @@ import { ProfileInterfaceProps, ProfileInterfaceState } from '../../interfaces/P
 const emptyState = {
   vibeColors: ['#FFFFFF','#FFC300','#5187F0','#FF351A','#8600B6','#00cc00'], //White, yellow, blue,orange,purple, green
   vibe: 0,
-  status: 'show'
+  status: 'flex'
 }
 
 export default class Profile extends React.Component<ProfileInterfaceProps,ProfileInterfaceState> {
@@ -22,29 +22,35 @@ export default class Profile extends React.Component<ProfileInterfaceProps,Profi
     }
   };
 
-  changeColor = () => {  
+  changeColor = () => { 
     if(emptyState.vibe==5){ emptyState.vibe = -1;}
 
     else{this.setState({ vibe: ++emptyState.vibe}) }
   }
 
-  
-  hide = () => {  
-    if(this.state.status=='show'){this.setState({ status: 'none',})}
-    else{ this.setState({ status: 'show',})}
+  hide = () => {
+    const { status } = this.state;
+
+    if (status=='flex') {
+      this.setState({ status: 'none',})
+    } else { 
+      this.setState({ status: 'flex',})
+    }
   }
   
   render() {
     const {vibe, vibeColors, status} = this.state;
+    const { navigation } = this.props;
+
     return (
       <View style={{ flex: 1, alignContent: 'center', flexDirection: 'column' }}>
-        <Menu hideContent={this.hide} navigation/>
+        <Menu hideContent={this.hide} navigation={navigation} />
         <View style={[profileStyles.profile, {display: status}]}>
           <View style={[profileStyles.middleContainer]}>
-          <TouchableOpacity onPress={this.changeColor}>
-            <Image style={{width:200, height: 300, resizeMode: 'contain' }} source={personLogo} />
-            <Text style={[profileStyles.text,{color:vibeColors[vibe]}]}> Nathan's Vibe </Text>  
-          </TouchableOpacity>
+            <TouchableOpacity onPress={this.changeColor}>
+              <Image style={{width:200, height: 300, resizeMode: 'contain' }} source={personLogo} />
+              <Text style={[profileStyles.text, {color:vibeColors[vibe]}]}>Nathan's Vibe</Text>  
+            </TouchableOpacity>
           </View>
           <View style={[profileStyles.lowerContainer]}>
             <View style={profileStyles.elementMargin}>

@@ -35,7 +35,7 @@ const menuStyles = StyleSheet.create({
     flex: 0.1, 
     flexDirection: 'row', 
     height: 80,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   body: {
     flex: 0.9, 
