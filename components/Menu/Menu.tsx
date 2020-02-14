@@ -54,15 +54,9 @@ export default class Menu extends React.Component<MenuInterfaceProps,MenuInterfa
   };
   
   changeContent = () =>{ 
-    const { hideContent } = this.props;
-
     this.setState({ 
       showDropBox: !this.state.showDropBox
     })
-
-    if(this.props.hideContent){
-      hideContent() 
-    }
   }
 
   render() {
@@ -71,25 +65,26 @@ export default class Menu extends React.Component<MenuInterfaceProps,MenuInterfa
 
     return (
       <View style={menuStyles.menuActive}>
-          <View style={menuStyles.upperActive}>
-            <TouchableOpacity onPressIn={this.changeContent}>
-              <Image style={{ width:50, resizeMode: 'contain' }} source={burger} />
-            </TouchableOpacity>
-            <Image style={{ width:180, resizeMode: 'contain' }} source={menuLogo} />
-            <View style={{ alignItems: 'flex-end', alignContent: 'flex-end', flex: 1 }}>
-              <Image style={{ width: 45, height: 45, resizeMode: 'contain' }} source={menuIcon} />
-            </View>
+        <View style={menuStyles.upperActive}>
+          <TouchableOpacity onPressIn={this.changeContent}>
+            <Image style={{ width: 50, resizeMode: 'contain' }} source={burger} />
+          </TouchableOpacity>
+          <Image style={{ width:180, resizeMode: 'contain', marginLeft: 4 }} source={menuLogo} />
+          <View style={{ alignItems: 'flex-end', alignContent: 'flex-end', flex: 1 }}>
+            <Image style={{ width: 45, height: 45, resizeMode: 'contain' }} source={menuIcon} />
           </View>
+        </View>
 
-           {showDropBox? <Animated.View style={[{opacity: animation}, menuStyles.body]}>
+        {showDropBox ? 
+          <Animated.View style={[{opacity: animation}, menuStyles.body]}>
             <View style={menuStyles.menuContainer}>
               {Object.keys(menuItems).map((currItem) => (
                 menuItem(navigate, menuItems[currItem][1], menuItems[currItem][0], currItem)
               ))}
             </View>
-          </Animated.View> : null }  
-
-    </View>
+          </Animated.View> : 
+        null}  
+      </View>
     );
   }
 }

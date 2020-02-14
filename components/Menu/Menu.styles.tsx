@@ -20,25 +20,22 @@ const menuStyles = StyleSheet.create({
   },
   menuActive: {
     backgroundColor: colors.black,
-    flex: 1,
     flexDirection: 'column',
     alignItems: 'flex-start',
     padding: 20,
   },
-  upper: {
-    flex: 1, 
+  upper: { 
     flexDirection: 'row', 
-    height: 80,
+    height: 50,
     alignItems: 'center',
   },
   upperActive: {
-    flex: 0.1, 
     flexDirection: 'row', 
-    height: 80,
+    height: 50,
     alignItems: 'center'
   },
   body: {
-    flex: 0.9, 
+    height: '100%', 
     flexDirection: 'column', 
     alignItems: 'center',
     justifyContent: 'center',

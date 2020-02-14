@@ -6,6 +6,7 @@ import generalStyles from '../../styles/generalStyles';
 import landingLogo from '../../assets/img/app_dark_logo.png';
 import playButton from '../../assets/img/play.png';
 import mockResult from '../../mock/mockplaylist.json';
+import Menu from '../Menu/Menu';
 
 const sampleQueries = [
   "I'm falling in love",
@@ -21,6 +22,7 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
       placeHolder: sampleQueries[0],
       query: '',
       isActive: false,
+      menuStatus: 'flex',
     };
   }
 
@@ -77,9 +79,11 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
 
   render() {
     const { placeHolder, query } = this.state;
+    const { navigation } = this.props;
 
     return (
       <View style={landingStyles.landing}>
+        <Menu navigation={navigation} />
         <View style={landingStyles.landingContainer}>
           <Text style={[generalStyles.title, landingStyles.elementMargin]}>What's the story?</Text>
           <TextInput 
