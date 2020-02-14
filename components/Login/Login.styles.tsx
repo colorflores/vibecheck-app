@@ -19,8 +19,8 @@ const loginStyles = StyleSheet.create({
     justifyContent: 'center'
   },
   loginLogo: {
-    width: 260,
-    height: 260,
+    width: 200,
+    height: 200,
     resizeMode: 'contain',
     marginBottom: 25
   },

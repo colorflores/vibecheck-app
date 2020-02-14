@@ -31,6 +31,8 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
     const testToken = await getData('ACCESS_TOKEN');
     console.log(testToken);
 
+    navigate('Loading');
+
     await wait(2000);
 
     if (testToken) {
@@ -51,7 +53,7 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
             </Text>
           </TouchableOpacity>
           <Text style={{ color: 'white' }}>
-            {accessTokenStatus === true ? 'active' : 'not active'}
+            {accessTokenStatus === true ? 'Token active' : 'Token not active'}
           </Text>
         </View>
         <Image style={generalStyles.bottomDarkLogo} source={bottomLogo} />
