@@ -24,6 +24,9 @@ const menuStyles = StyleSheet.create({
     alignItems: 'flex-start',
     padding: 20,
   },
+  landing: {
+    backgroundColor: colors.yellow,
+  },
   upper: { 
     flexDirection: 'row', 
     height: 50,
@@ -32,15 +35,15 @@ const menuStyles = StyleSheet.create({
   upperActive: {
     flexDirection: 'row', 
     height: 50,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   body: {
     height: '100%', 
     flexDirection: 'column', 
     alignItems: 'center',
-    justifyContent: 'center',
     alignContent: 'center',
-    left: 30,
+    left: 40,
+    top: 80
   },
   option: {
     flexDirection: 'row', 

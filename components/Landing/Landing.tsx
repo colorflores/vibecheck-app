@@ -100,7 +100,6 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
             <Text style={generalStyles.titleButton}>don't have one?</Text>
           </TouchableOpacity>
         </View>
-        <Image style={generalStyles.bottomDarkLogo} source={landingLogo} />
       </View>
     );
   }

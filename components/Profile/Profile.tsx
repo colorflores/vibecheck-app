@@ -10,7 +10,6 @@ import { ProfileInterfaceProps, ProfileInterfaceState } from '../../interfaces/P
 const emptyState = {
   vibeColors: ['#FFFFFF','#FFC300','#5187F0','#FF351A','#8600B6','#00cc00'], //White, yellow, blue,orange,purple, green
   vibe: 0,
-  status: 'flex'
 }
 
 export default class Profile extends React.Component<ProfileInterfaceProps,ProfileInterfaceState> {
@@ -27,25 +26,15 @@ export default class Profile extends React.Component<ProfileInterfaceProps,Profi
 
     else{this.setState({ vibe: ++emptyState.vibe}) }
   }
-
-  hide = () => {
-    const { status } = this.state;
-
-    if (status=='flex') {
-      this.setState({ status: 'none',})
-    } else { 
-      this.setState({ status: 'flex',})
-    }
-  }
   
   render() {
-    const {vibe, vibeColors, status} = this.state;
+    const {vibe, vibeColors} = this.state;
     const { navigation } = this.props;
 
     return (
       <View style={{ flex: 1, alignContent: 'center', flexDirection: 'column' }}>
-        <Menu hideContent={this.hide} navigation={navigation} />
-        <View style={[profileStyles.profile, {display: status}]}>
+        <Menu navigation={navigation} />
+        <View style={profileStyles.profile}>
           <View style={[profileStyles.middleContainer]}>
             <TouchableOpacity onPress={this.changeColor}>
               <Image style={{width:200, height: 300, resizeMode: 'contain' }} source={personLogo} />

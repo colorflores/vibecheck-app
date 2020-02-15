@@ -45,7 +45,7 @@ const wait = async (time) => (
 )
 
 export default class Profile extends React.Component <LoadingInterfaceProps, LoadingInterfaceState> {
-  constructor(props: object) {
+  constructor(props) {
     super(props);
     this.state = {
       ...emptyState
@@ -63,7 +63,7 @@ export default class Profile extends React.Component <LoadingInterfaceProps, Loa
 
     this.setState({
       isReady: true,
-    })
+    });
 
     await wait(2000);
 

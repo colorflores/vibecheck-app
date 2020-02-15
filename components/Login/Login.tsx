@@ -8,7 +8,7 @@ import bottomLogo from '../../assets/img/app_dark_logo.png';
 import { getAuthTokens } from '../../util/Spotify.util';
 import { getData } from '../../util/Storage.util';
 
-const wait = async (time) => (
+const wait = async (time: number) => (
   new Promise((resolve) => {
     setTimeout(() => {
       return resolve('');
@@ -29,7 +29,6 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
 
     await getAuthTokens();
     const testToken = await getData('ACCESS_TOKEN');
-    console.log(testToken);
 
     navigate('Loading');
 
@@ -52,9 +51,9 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
               Log in with Spotify
             </Text>
           </TouchableOpacity>
-          <Text style={{ color: 'white' }}>
+          {/* <Text style={{ color: 'white' }}>
             {accessTokenStatus === true ? 'Token active' : 'Token not active'}
-          </Text>
+          </Text> */}
         </View>
         <Image style={generalStyles.bottomDarkLogo} source={bottomLogo} />
       </View>
