@@ -32,7 +32,7 @@ export default class Profile extends React.Component<ProfileInterfaceProps,Profi
     const { navigation } = this.props;
 
     return (
-      <View style={{ flex: 1, alignContent: 'center', flexDirection: 'column' }}>
+      <View style={{ flex: 1, alignContent: 'center', flexDirection: 'column'}}>
         <Menu navigation={navigation} />
         <View style={profileStyles.profile}>
           <View style={[profileStyles.middleContainer]}>
