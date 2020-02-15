@@ -3,7 +3,6 @@ import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import { LandingInterfaceProps, LandingInterfaceState } from '../../interfaces/Landing.interface';
 import landingStyles from './Landing.styles';
 import generalStyles from '../../styles/generalStyles';
-import landingLogo from '../../assets/img/app_dark_logo.png';
 import playButton from '../../assets/img/play.png';
 import mockResult from '../../mock/mockplaylist.json';
 import Menu from '../Menu/Menu';
