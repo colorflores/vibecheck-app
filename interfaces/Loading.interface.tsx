@@ -1,5 +1,5 @@
 export interface LoadingInterfaceProps {
-  // navigation,
+  navigation,
 }
 
 export interface LoadingInterfaceState {

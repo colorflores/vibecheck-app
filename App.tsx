@@ -47,7 +47,7 @@ const Navigator = createStackNavigator({
   Profile: {screen: Profile, navigationOptions: {
     headerShown: false,
     cardStyle: {
-      paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight,
+      paddingTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
       backgroundColor: 'black',
     }
   }},

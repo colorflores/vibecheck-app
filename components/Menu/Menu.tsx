@@ -2,31 +2,53 @@ import React from 'react';
 import { Text, View, Image,TouchableOpacity, Animated } from 'react-native';
 import menuStyles from './Menu.styles';
 import menuLogo from '../../assets/img/app_dark_logo.png';
+import menuLogoLight from '../../assets/img/app_light_logo.png';
 import burger from '../../assets/img/menu.png';
+import darkBurger from '../../assets/img/menu_dark.png';
 import menuIcon from '../../assets/img/icon_menu.png';
+import menuIconLight from '../../assets/img/icon_menu_light.png';
 import whiteDot from '../../assets/img/whitedot.png';
 import purpleDot from '../../assets/img/purpledot.png';
 import yellowDot from '../../assets/img/yellowdot.png';
 import blueDot from '../../assets/img/bluedot.png';
 import blackDot from '../../assets/img/blackdot.png';
 import orangeDot from '../../assets/img/orangedot.png';
+import { deleteData } from '../../util/Storage.util';
 
 import { MenuInterfaceProps, MenuInterfaceState } from '../../interfaces/Menu.Interface';
 
 const emptyState = {
   showDropBox: false,
   animation: new Animated.Value(0)
-
 }
 
-const menuItem = (navFunction, target, dotSrc, text) => (
-  <View style={menuStyles.elementMargin} key={`${text}-id`}>
-    <TouchableOpacity onPressIn={() => navFunction(target)} style={menuStyles.option}>
-      <Image style={menuStyles.dotStyle} source={dotSrc} />
-      <Text style={menuStyles.text}>{text}</Text>
-    </TouchableOpacity>
-  </View>
-)
+const menuItem = (navFunction, target, dotSrc, text) => {
+  if (target === "LogOut") {
+    return (
+      <View style={menuStyles.elementMargin} key={`${text}-id`}>
+        <TouchableOpacity onPressIn={async () => {
+          await deleteData('ACCESS_TOKEN');
+          await deleteData('REFRESH_TOKEN');
+          await deleteData('EXPIRY_TIME');
+          
+          navFunction('Login');
+        }} style={menuStyles.option}>
+          <Image style={menuStyles.dotStyle} source={dotSrc} />
+          <Text style={menuStyles.text}>{text}</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  } else {
+    return (
+      <View style={menuStyles.elementMargin} key={`${text}-id`}>
+        <TouchableOpacity onPressIn={() => navFunction(target)} style={menuStyles.option}>
+          <Image style={menuStyles.dotStyle} source={dotSrc} />
+          <Text style={menuStyles.text}>{text}</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+}
 
 const menuItems = {
   'Vibecheck': [yellowDot, 'Vibecheck'],
@@ -34,7 +56,7 @@ const menuItems = {
   'Your playlists': [blackDot,'Playlists'],
   'Your profile': [blueDot,'Profile'],
   'About us': [purpleDot,'About'],
-  'Log out': [orangeDot,'LogOut']
+  'Log out': [orangeDot,'LogOut'] //? This does actually redirect to a "logout page, it takes you to loading"
 };
 
 Animated.timing(emptyState.animation, {
@@ -54,42 +76,45 @@ export default class Menu extends React.Component<MenuInterfaceProps,MenuInterfa
   };
   
   changeContent = () =>{ 
-    const { hideContent } = this.props;
-
     this.setState({ 
       showDropBox: !this.state.showDropBox
     })
+  }
 
-    if(this.props.hideContent){
-      hideContent() 
-    }
+  goToLanding = (navigation) => {
+    navigation('Landing');
+
+    this.setState({ showDropBox: false })
   }
 
   render() {
     const { showDropBox, animation } = this.state;
-    const { navigate } = this.props.navigation;
+    const { navigate, state } = this.props.navigation;
 
     return (
-      <View style={menuStyles.menuActive}>
-          <View style={menuStyles.upperActive}>
-            <TouchableOpacity onPressIn={this.changeContent}>
-              <Image style={{ width:50, resizeMode: 'contain' }} source={burger} />
+      <View style={[menuStyles.menuActive, (state.routeName === "Landing" && !showDropBox ? menuStyles.landing : null)]}>
+        <View style={menuStyles.upperActive}>
+          <TouchableOpacity onPressIn={this.changeContent}>
+            <Image style={{ width: 50, resizeMode: 'contain' }} source={(state.routeName === "Landing" && !showDropBox ? darkBurger : burger)} />
+          </TouchableOpacity>
+          <Image style={{ width:180, resizeMode: 'contain', marginLeft: 4 }} source={(state.routeName === "Landing" && !showDropBox ? menuLogoLight : menuLogo)} />
+          <View style={{ alignItems: 'flex-end', alignContent: 'flex-end', flex: 1 }}>
+            <TouchableOpacity onPressIn={() => this.goToLanding(navigate)}>
+              <Image style={{ width: 45, height: 45, resizeMode: 'contain' }} source={(state.routeName === "Landing" && !showDropBox ? menuIconLight : menuIcon)} />
             </TouchableOpacity>
-            <Image style={{ width:180, resizeMode: 'contain' }} source={menuLogo} />
-            <View style={{ alignItems: 'flex-end', alignContent: 'flex-end', flex: 1 }}>
-              <Image style={{ width: 45, height: 45, resizeMode: 'contain' }} source={menuIcon} />
-            </View>
           </View>
+        </View>
 
-           {showDropBox? <Animated.View style={[{opacity: animation}, menuStyles.body]}>
+        {showDropBox ? 
+          <Animated.View style={[{opacity: animation}, menuStyles.body]}>
             <View style={menuStyles.menuContainer}>
               {Object.keys(menuItems).map((currItem) => (
                 menuItem(navigate, menuItems[currItem][1], menuItems[currItem][0], currItem)
               ))}
             </View>
-          </Animated.View> : null }  
-
-    </View>
+          </Animated.View> : 
+        null}  
+      </View>
     );
   }
 }
