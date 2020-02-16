@@ -43,10 +43,10 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
                   artist={song.artist_name} 
                   album={song.genre}
                   controlURI="test"
+                  
                 />)
               ))
             ) : ''}
-            <View style={vibeCheckStyles.bottomLine} />
           </View>
         </ScrollView>
       </View>
