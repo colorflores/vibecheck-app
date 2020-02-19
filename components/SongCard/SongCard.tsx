@@ -26,17 +26,8 @@ const SongCard = ({ title, artist, album, albumuri = test, controlURI, setActive
     <View style={songCardStyles.songCardContainer}>
       <View style={songCardStyles.albumContainer}>
         <Image source={albumuri} style={songCardStyles.albumImage} />
-        <TouchableOpacity onPress={() => updateStatus()} style={{ 
-            position: 'absolute', 
-            backgroundColor: 'rgba(0,0,0, 0.3)', 
-            height: '100%', 
-            width: '100%',
-            flexDirection: 'column',
-            alignContent: 'center',
-            justifyContent: 'center',
-            alignItems: 'center' 
-          }}>
-          <Image style={{ width: 40, height: 40, resizeMode: 'contain' }} source={(songIsActive ? pauseButton : playButton)} />
+        <TouchableOpacity onPress={() => updateStatus()} style={songCardStyles.albumShading}>
+          <Image style={songCardStyles.statusButton} source={(songIsActive ? pauseButton : playButton)} />
         </TouchableOpacity>
       </View>
       <View style={songCardStyles.songContainerOutter}>
