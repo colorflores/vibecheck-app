@@ -19,7 +19,7 @@ const spotifyScopes = [
   'playlist-modify-public',
   'playlist-modify-private', 
   'user-read-recently-played', 
-  'user-top-read'
+  'user-top-read',
 ].join(' ');
 
 const getExpiryTime = (time) => new Date().getTime() + time * 1000;

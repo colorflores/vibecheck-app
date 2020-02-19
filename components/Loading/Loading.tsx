@@ -8,6 +8,7 @@ import { loadAsync } from 'expo-font';
 import { LoadingInterfaceProps, LoadingInterfaceState } from '../../interfaces/Loading.interface';
 import { getData } from '../../util/Storage.util';
 import { refreshAuthTokens } from '../../util/Spotify.util';
+import { initializeAPI } from '../../util/SpotifyAPI.util';
 
 const emptyState = {
   spinValue: new Animated.Value(0),
@@ -71,9 +72,12 @@ export default class Profile extends React.Component <LoadingInterfaceProps, Loa
     await wait(2000);
 
     const currentTokenTime = await getData('EXPIRY_TIME');
+    const currentToken = await getData('ACCESS_TOKEN');
     const currentDate = new Date().getTime();
 
     if (currentTokenTime) {
+      initializeAPI(currentToken);
+
       if (JSON.parse(currentTokenTime) < currentDate) {
         await refreshAuthTokens();
         navigate('Landing');

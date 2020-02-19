@@ -40,16 +40,16 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
               </TouchableOpacity>
             </View>
             {(results && query) ? (
-              results.map((song, index) => (
+              results.map((song, index: number) => (
                 (<SongCard
-                  key={song.track_id}
+                  key={index}
                   title={song.track_name} 
                   artist={song.artist_name} 
                   album={song.genre}
-                  controlURI="test"
                   setActive={signal}
-                  id={index}
+                  songId={song.track_id}
                   amIActive={activeSong}
+                  listIdentifier={index}
                 />)
               ))
             ) : ''}

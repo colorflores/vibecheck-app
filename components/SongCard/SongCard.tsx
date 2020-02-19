@@ -4,12 +4,13 @@ import test from '../../assets/img/test.jpg';
 import songCardStyles from './SongCard.style';
 import playButton from '../../assets/img/play_button.png';
 import pauseButton from '../../assets/img/pause_button.png';
+import { playTrack, pauseTrack } from '../../util/SpotifyAPI.util';
 
-const SongCard = ({ title, artist, album, albumuri = test, controlURI, setActive, id, amIActive }) => {
+const SongCard = ({ title, artist, album, albumuri = test, setActive, songId, amIActive, listIdentifier }) => {
   const [songIsActive, setSongStatus] = useState(false);
 
   useEffect(() => {
-    if (id !== amIActive && songIsActive) {
+    if (listIdentifier !== amIActive && songIsActive) {
       setSongStatus(false);
     }
   })
@@ -18,7 +19,10 @@ const SongCard = ({ title, artist, album, albumuri = test, controlURI, setActive
     setSongStatus(!songIsActive);
 
     if (!songIsActive) {
-      setActive(id);
+      playTrack(songId);
+      setActive(listIdentifier);
+    } else {
+      pauseTrack();
     }
   }
 
