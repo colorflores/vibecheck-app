@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import test from '../../assets/img/test.jpg';
 import songCardStyles from './SongCard.style';
@@ -7,6 +7,12 @@ import pauseButton from '../../assets/img/pause_button.png';
 
 const SongCard = ({ title, artist, album, albumuri = test, controlURI }) => {
   const [songStatus, setSongStatus] = useState(false);
+
+  useEffect(() => {
+    if (songStatus) { 
+      
+    }
+  })
 
   return (
     <View style={songCardStyles.songCardContainer}>

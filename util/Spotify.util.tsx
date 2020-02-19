@@ -43,6 +43,8 @@ export const getAuthTokens = async () => {
   try {
     const authorizationCode = await getAuthCode();
     const encodedCredentials = encode(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
+    const redirectUri = AuthSession.getRedirectUri();
+
     const reqConfig = {
       method: 'POST',
       headers: {
@@ -50,7 +52,7 @@ export const getAuthTokens = async () => {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: `grant_type=authorization_code&code=${authorizationCode}&redirect_uri=${
-        spotifyCredentials.redirectUri
+        redirectUri
       }`,
     }
 
