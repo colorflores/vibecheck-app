@@ -1,24 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import test from '../../assets/img/test.jpg';
 import songCardStyles from './SongCard.style';
 import playButton from '../../assets/img/play_button.png';
 import pauseButton from '../../assets/img/pause_button.png';
 
-const SongCard = ({ title, artist, album, albumuri = test, controlURI }) => {
-  const [songStatus, setSongStatus] = useState(false);
+const SongCard = ({ title, artist, album, albumuri = test, controlURI, setActive, id, amIActive }) => {
+  const [songIsActive, setSongStatus] = useState(false);
 
   useEffect(() => {
-    if (songStatus) { 
-      
+    if (id !== amIActive && songIsActive) {
+      setSongStatus(false);
     }
   })
+
+  const updateStatus = () => {
+    setSongStatus(!songIsActive);
+
+    if (!songIsActive) {
+      setActive(id);
+    }
+  }
 
   return (
     <View style={songCardStyles.songCardContainer}>
       <View style={songCardStyles.albumContainer}>
         <Image source={albumuri} style={songCardStyles.albumImage} />
-        <TouchableOpacity onPress={() => setSongStatus(!songStatus)} style={{ 
+        <TouchableOpacity onPress={() => updateStatus()} style={{ 
             position: 'absolute', 
             backgroundColor: 'rgba(0,0,0, 0.3)', 
             height: '100%', 
@@ -28,7 +36,7 @@ const SongCard = ({ title, artist, album, albumuri = test, controlURI }) => {
             justifyContent: 'center',
             alignItems: 'center' 
           }}>
-          <Image style={{ width: 50, height: 50, resizeMode: 'contain' }} source={(songStatus ? pauseButton : playButton)} />
+          <Image style={{ width: 40, height: 40, resizeMode: 'contain' }} source={(songIsActive ? pauseButton : playButton)} />
         </TouchableOpacity>
       </View>
       <View style={songCardStyles.songContainerOutter}>

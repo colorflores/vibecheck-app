@@ -28,13 +28,13 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
     const { navigate } = this.props.navigation
 
     await getAuthTokens();
-    const testToken = await getData('ACCESS_TOKEN');
+    const expiryTime = await getData('EXPIRY_TIME');
 
-    navigate('Loading');
+    // navigate('Loading');
 
     await wait(2000);
 
-    if (testToken) {
+    if (expiryTime) {
       navigate('Landing');
     }
   }

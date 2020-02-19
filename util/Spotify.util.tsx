@@ -43,7 +43,7 @@ export const getAuthTokens = async () => {
   try {
     const authorizationCode = await getAuthCode();
     const encodedCredentials = encode(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
-    const redirectUri = AuthSession.getRedirectUri();
+    const redirectUri = AuthSession.getRedirectUrl();
 
     const reqConfig = {
       method: 'POST',

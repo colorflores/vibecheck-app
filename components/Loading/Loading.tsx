@@ -54,16 +54,19 @@ export default class Profile extends React.Component <LoadingInterfaceProps, Loa
 
   async componentDidMount() {
     const { navigate } = this.props.navigation;
+    const { isReady } = this.state;
 
-    await loadAsync({
-      'sail': require('../../assets/fonts/Sail.ttf'),
-      'worksans-regular': require('../../assets/fonts/WorkSans-Regular.ttf'),
-      'worksans-light': require('../../assets/fonts/WorkSans-Light.ttf')
-    });
-
-    this.setState({
-      isReady: true,
-    });
+    if (!isReady) {
+      await loadAsync({
+        'sail': require('../../assets/fonts/Sail.ttf'),
+        'worksans-regular': require('../../assets/fonts/WorkSans-Regular.ttf'),
+        'worksans-light': require('../../assets/fonts/WorkSans-Light.ttf')
+      });
+  
+      this.setState({
+        isReady: true,
+      });
+    }
 
     await wait(2000);
 
