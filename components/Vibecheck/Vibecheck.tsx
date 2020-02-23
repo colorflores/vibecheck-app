@@ -10,6 +10,7 @@ import { getData, saveData } from '../../util/Storage.util';
 import mockResult from '../../mock/mockplaylist.json';
 import saveSpotifyIcon from '../../assets/img/spotify_save.png';
 import shareIcon from '../../assets/img/share_icon.png';
+import { savePlaylist } from '../../util/SpotifyAPI.util';
 
 export default class Vibecheck extends React.Component<VibecheckInterfaceProps, VibecheckInterfaceState> {
   constructor(props) {
@@ -67,7 +68,11 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
     }
   }
 
-  savePlaylist = () => {
+  savePlaylist = async () => {
+    const { query, results } = this.state;
+
+    await savePlaylist(query, results);
+
     Alert.alert(
       'Vibecheck',
       'Your playlist has been saved to your Spotify account!',

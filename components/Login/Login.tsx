@@ -7,6 +7,7 @@ import loginLogo from '../../assets/img/login_logo.png'
 import bottomLogo from '../../assets/img/app_dark_logo.png';
 import { getAuthTokens } from '../../util/Spotify.util';
 import { getData } from '../../util/Storage.util';
+import { initializeAPI } from '../../util/SpotifyAPI.util';
 
 const wait = async (time: number) => (
   new Promise((resolve) => {
@@ -30,11 +31,14 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
     await getAuthTokens();
     const expiryTime = await getData('EXPIRY_TIME');
 
-    // navigate('Loading');
+    navigate('Loading');
 
-    await wait(2000);
+    await wait(1000);
 
-    if (expiryTime) {
+    if (expiryTime !== undefined) {
+      const newToken = await getData('ACCESS_TOKEN');
+        
+      initializeAPI(newToken);
       navigate('Landing');
     }
   }

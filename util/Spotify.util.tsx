@@ -84,7 +84,7 @@ export const refreshAuthTokens = async () => {
     const currRefreshToken = await getData('REFRESH_TOKEN');
     
     const reqConfig = {
-      method: 'post',
+      method: 'POST',
       headers: {
         Authorization: `Basic ${encodedCredentials}`,
         'Content-Type': 'application/x-www-form-urlencoded',
