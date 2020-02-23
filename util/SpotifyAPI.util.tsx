@@ -4,6 +4,8 @@ import Spotify from 'spotify-web-api-js';
 
 const s = new Spotify();
 let user = null;
+let latestPlaylistURL = null;
+let latestPlaylist = null;
 
 const verifyToken = async () => {
   const currentTokenTime = await getData('EXPIRY_TIME');
@@ -60,10 +62,20 @@ export const savePlaylist = async (name, songs) => {
     })
   }).then(async (res) => Promise.resolve(await res.json()))
 
-  console.log(songs);
+  latestPlaylist = newPlaylist.name;
+  latestPlaylistURL = newPlaylist.external_urls.spotify;
 
   // ?Do this when URIs are added to each song
   // await s.addTracksToPlaylist(newPlaylist.id, [
     
   // ])
+}
+
+export const sharePlaylist = async (name, songs) => {
+  if (latestPlaylistURL && name === latestPlaylist) {
+    return latestPlaylistURL;
+  } else {
+    await savePlaylist(name, songs)
+    return latestPlaylistURL;
+  }
 }

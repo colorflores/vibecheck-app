@@ -10,7 +10,7 @@ import { getData, saveData } from '../../util/Storage.util';
 import mockResult from '../../mock/mockplaylist.json';
 import saveSpotifyIcon from '../../assets/img/spotify_save.png';
 import shareIcon from '../../assets/img/share_icon.png';
-import { savePlaylist } from '../../util/SpotifyAPI.util';
+import { savePlaylist, sharePlaylist } from '../../util/SpotifyAPI.util';
 
 export default class Vibecheck extends React.Component<VibecheckInterfaceProps, VibecheckInterfaceState> {
   constructor(props) {
@@ -85,10 +85,14 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
     );
   }
 
-  sharePlaylist = () => {
+  sharePlaylist = async () => {
+    const { query, results } = this.state;
+
+    const shareLink = await sharePlaylist(query, results);
+
     Share.share({
-      message: 'Check out this playlist I made with vibecheck! https://omarflores.dev',
-      url: 'https://omarflores.dev',
+      message: `Check out this playlist I made with vibecheck! ${shareLink}`,
+      url: `${shareLink}`,
       title: 'Share this playlist',
     }, {
       dialogTitle: 'Share this playlist',
