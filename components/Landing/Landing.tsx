@@ -4,8 +4,8 @@ import { LandingInterfaceProps, LandingInterfaceState } from '../../interfaces/L
 import landingStyles from './Landing.styles';
 import generalStyles from '../../styles/generalStyles';
 import playButton from '../../assets/img/play.png';
-import mockResult from '../../mock/mockplaylist.json';
 import Menu from '../Menu/Menu';
+import { saveData, getData, deleteData as yeet } from '../../util/Storage.util';
 
 const sampleQueries = [
   "I'm falling in love",
@@ -25,7 +25,14 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() { 
+    await yeet('LATEST_QUERY');
+    await yeet('LATEST_RESULT');
+    
+    this.setState({
+      query: null,
+    });
+
     this.changePlaceHolder();
   }
 
@@ -64,16 +71,14 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
     })
   }
 
-  checkVibe = () => {
+  checkVibe = async () => {
     const { query } = this.state;
     const { navigate } = this.props.navigation;
 
-    // ?Do some stuff with the query
-
     if (query !== '') {
-      navigate('Vibecheck', {query: query, results: {...mockResult}})
+      await saveData('LATEST_QUERY', query);
+      navigate('Vibecheck')
     }
-
   }
 
   render() {

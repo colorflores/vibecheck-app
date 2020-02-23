@@ -1,4 +1,4 @@
-import { Platform, StatusBar, StatusBarIOS } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import Landing from './components/Landing/Landing';
 import Profile from './components/Profile/Profile';
 import Menu from './components/Menu/Menu';

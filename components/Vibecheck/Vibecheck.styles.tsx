@@ -30,7 +30,8 @@ const vibeCheckStyles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     color: colors.black,
-    width: '75%',
+    flex: 1,
+    marginRight: 20,
     textAlign: 'center',
   },
   searchContainer: {
