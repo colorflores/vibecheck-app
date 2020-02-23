@@ -13,7 +13,7 @@ import yellowDot from '../../assets/img/yellowdot.png';
 import blueDot from '../../assets/img/bluedot.png';
 import blackDot from '../../assets/img/blackdot.png';
 import orangeDot from '../../assets/img/orangedot.png';
-import { deleteData } from '../../util/Storage.util';
+import { deleteData as yeet } from '../../util/Storage.util';
 
 import { MenuInterfaceProps, MenuInterfaceState } from '../../interfaces/Menu.Interface';
 
@@ -27,9 +27,9 @@ const menuItem = (navFunction, target, dotSrc, text) => {
     return (
       <View style={menuStyles.elementMargin} key={`${text}-id`}>
         <TouchableOpacity onPressIn={async () => {
-          await deleteData('ACCESS_TOKEN');
-          await deleteData('REFRESH_TOKEN');
-          await deleteData('EXPIRY_TIME');
+          await yeet('ACCESS_TOKEN');
+          await yeet('REFRESH_TOKEN');
+          await yeet('EXPIRY_TIME');
           
           navFunction('Login');
         }} style={menuStyles.option}>
