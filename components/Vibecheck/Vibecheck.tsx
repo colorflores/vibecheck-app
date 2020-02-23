@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, TextInput, TouchableOpacity, Image, ScrollView, Text, Alert, Share } from 'react-native';
 import { VibecheckInterfaceProps, VibecheckInterfaceState } from '../../interfaces/Vibecheck.interface';
 import generalStyles from '../../styles/generalStyles';
 import vibeCheckStyles from './Vibecheck.styles';
@@ -8,6 +8,8 @@ import searchIcon from '../../assets/img/search_icon.png';
 import Menu from '../Menu/Menu';
 import { getData, saveData } from '../../util/Storage.util';
 import mockResult from '../../mock/mockplaylist.json';
+import saveSpotifyIcon from '../../assets/img/spotify_save.png';
+import shareIcon from '../../assets/img/share_icon.png';
 
 export default class Vibecheck extends React.Component<VibecheckInterfaceProps, VibecheckInterfaceState> {
   constructor(props) {
@@ -35,8 +37,6 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
 
       latestResults = await getData('LATEST_RESULT');
 
-      console.log(latestResults);
-
       if (latestResults !== undefined) {
         this.setState({
           results: JSON.parse(latestResults).songs,
@@ -62,8 +62,33 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
 
       this.setState({
         latestQuery: query,
+        results: mockResult.songs
       });
     }
+  }
+
+  savePlaylist = () => {
+    Alert.alert(
+      'Vibecheck',
+      'Your playlist has been saved to your Spotify account!',
+      [{
+        text: 'Done',
+        style: 'default'
+      }], { 
+        cancelable: true
+      }
+    );
+  }
+
+  sharePlaylist = () => {
+    Share.share({
+      message: 'Check out this playlist I made with vibecheck! https://omarflores.dev',
+      url: 'https://omarflores.dev',
+      title: 'Share this playlist',
+    }, {
+      dialogTitle: 'Share this playlist',
+      subject: 'Share this playlist I made with vibecheck!'
+    })
   }
 
   render() {
@@ -71,7 +96,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
     const { navigation } = this.props;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, flexDirection: 'column' }}>
         <Menu navigation={navigation} />
         <ScrollView style={vibeCheckStyles.vibecheckScroll}>
           <View style={vibeCheckStyles.vibecheckContainer}>
@@ -101,6 +126,14 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
             ) : null}
           </View>
         </ScrollView>
+        <View style={{ height: 60, backgroundColor: 'black', flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableOpacity onPress={() => this.savePlaylist()} style={{ width: '50%', height: '100%', justifyContent: 'center', flexDirection: 'row', alignContent: 'center', alignItems: 'center', padding: 14 }}>
+            <Image source={saveSpotifyIcon} style={{ height: '100%', resizeMode: 'contain' }} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.sharePlaylist()} style={{ width: '50%', height: '100%', justifyContent: 'center', flexDirection: 'row', alignContent: 'center', alignItems: 'center', padding: 14 }}>
+            <Image source={shareIcon} style={{ height: '100%', resizeMode: 'contain' }} />
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
