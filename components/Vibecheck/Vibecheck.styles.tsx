@@ -49,10 +49,6 @@ const vibeCheckStyles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     shadowColor: 'black',
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.5,
-    shadowRadius: 6,
-    elevation: 4,
   },
   searchIcon: {
     height: '100%',

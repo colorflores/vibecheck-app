@@ -35,8 +35,9 @@ const songCardStyles = StyleSheet.create({
     width: songCardHeight,
     height: songCardHeight,
     alignItems: 'center',
-    borderRadius: 10,
-    overflow: 'hidden'
+    borderRadius: 0,
+    overflow: 'hidden',
+    elevation: 8,
   },
   albumImage: {
     height: '100%',
@@ -46,7 +47,7 @@ const songCardStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     flexDirection: 'column',
-    padding: 10
+    paddingLeft: 10
   },
   songContainerInner: {
     flex: 1,
