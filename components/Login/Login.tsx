@@ -44,25 +44,25 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
 
     navigate('Loading');
 
-    await wait(1000);
+    // await wait(1000);
 
-    if (expiryTime !== null) {
-      const newToken = await getData('ACCESS_TOKEN');
+    // if (expiryTime !== null) {
+    //   const newToken = await getData('ACCESS_TOKEN');
         
-      initializeAPI(newToken);
-      navigate('Landing');
-    } else {
-      Alert.alert(
-        'Vibecheck',
-        `There was an error logging in, the time retreieved = ${expiryTime}`,
-        [{
-          text: 'Done',
-          style: 'default'
-        }], { 
-          cancelable: true
-        }
-      );
-    }
+    //   initializeAPI(newToken);
+    //   navigate('Landing');
+    // } else {
+    //   Alert.alert(
+    //     'Vibecheck',
+    //     `There was an error logging in, the time retreieved = ${expiryTime}`,
+    //     [{
+    //       text: 'Done',
+    //       style: 'default'
+    //     }], { 
+    //       cancelable: true
+    //     }
+    //   );
+    // }
   }
 
   render() {
