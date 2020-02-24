@@ -110,7 +110,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
         <ScrollView style={vibeCheckStyles.vibecheckScroll}>
           <View style={vibeCheckStyles.vibecheckContainer}>
             <View style={vibeCheckStyles.vibecheckHeader}>
-              <TextInput style={[vibeCheckStyles.queryBox, generalStyles.queryText]} value={query} onChangeText={input => {this.setState({ query: input })}} />
+              <TextInput multiline={true} style={[vibeCheckStyles.queryBox, generalStyles.queryText]} value={query} onChangeText={input => {this.setState({ query: input })}} />
               <TouchableOpacity onPress={() => this.vibecheck()}>
                 <View style={vibeCheckStyles.searchContainer}>
                   <View style={vibeCheckStyles.searchIconContainer}>

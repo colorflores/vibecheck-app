@@ -95,6 +95,7 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
             onChangeText={input => this.updateQuery(input)} 
             value={query} placeholderTextColor="rgba(0,0,0,0.3)" 
             placeholder={placeHolder} 
+            multiline={true}
             style={[generalStyles.queryText, landingStyles.elementMargin, landingStyles.queryBox]}
           />
           <TouchableOpacity onPress={this.checkVibe} style={[landingStyles.playBox, landingStyles.elementMargin]}>

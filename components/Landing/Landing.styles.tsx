@@ -30,7 +30,7 @@ const landingStyles = StyleSheet.create({
     textAlign: 'center',
   },
   playBox: {
-    height: '20%'
+    height: '30%'
   },
   playButton: {
     height: '100%',
