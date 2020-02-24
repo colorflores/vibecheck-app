@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Alert } from 'react-native';
 import { LoginInterfaceProps, LoginInterfaceState } from '../../interfaces/Login.interface';
 import generalStyles from '../../styles/generalStyles';
 import loginStyles from './Login.styles';
@@ -35,11 +35,22 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
 
     await wait(1000);
 
-    if (expiryTime !== undefined) {
+    if (expiryTime !== null) {
       const newToken = await getData('ACCESS_TOKEN');
         
       initializeAPI(newToken);
       navigate('Landing');
+    } else {
+      Alert.alert(
+        'Vibecheck',
+        `There was an error logging in, the time retreieved = ${expiryTime}`,
+        [{
+          text: 'Done',
+          style: 'default'
+        }], { 
+          cancelable: true
+        }
+      );
     }
   }
 
