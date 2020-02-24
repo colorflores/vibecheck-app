@@ -31,6 +31,17 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
     await getAuthTokens();
     const expiryTime = await getData('EXPIRY_TIME');
 
+    Alert.alert(
+      'Vibecheck',
+      `Current expiry time = ${expiryTime}`,
+      [{
+        text: 'Done',
+        style: 'default'
+      }], { 
+        cancelable: true
+      }
+    );
+
     navigate('Loading');
 
     await wait(1000);
