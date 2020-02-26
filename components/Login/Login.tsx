@@ -22,6 +22,7 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
     super(props);
     this.state = {
       accessTokenStatus: false,
+      loginActive: false,
     };
   }
 
@@ -31,25 +32,14 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
     await getAuthTokens();
     const expiryTime = await getData('EXPIRY_TIME');
 
-    Alert.alert(
-      'Vibecheck',
-      `Current expiry time = ${expiryTime}`,
-      [{
-        text: 'Done',
-        style: 'default'
-      }], { 
-        cancelable: true
-      }
-    );
+    console.log(expiryTime);
 
-    // navigate('Loading');
-
-    await wait(1000);
-
-    if (expiryTime !== null) {
+    if (expiryTime !== undefined) {
       const newToken = await getData('ACCESS_TOKEN');
         
       initializeAPI(newToken);
+      navigate('Loading');
+      await wait(1000);
       navigate('Landing');
     } else {
       Alert.alert(
@@ -66,13 +56,13 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
   }
 
   render() {
-    const { accessTokenStatus } = this.state;
+    const { accessTokenStatus, loginActive } = this.state;
 
     return (
       <View style={loginStyles.loginContainerOuter}>
         <View style={loginStyles.loginContainerInner}>
           <Image style={loginStyles.loginLogo} source={loginLogo}/>
-          <TouchableOpacity onPress={this.handleLogin} style={loginStyles.loginButton}>
+          <TouchableOpacity onPress={() => this.handleLogin()} onPressIn={() => this.setState({loginActive: true})} onPressOut={() => this.setState({loginActive: false})} activeOpacity={1} style={(loginActive ? loginStyles.loginButtonInactive : loginStyles.loginButton)}>
             <Text style={[generalStyles.queryText, loginStyles.loginText]}>
               Log in with Spotify
             </Text>

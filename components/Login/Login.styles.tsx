@@ -35,6 +35,16 @@ const loginStyles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 20
   },
+  loginButtonInactive: {
+    backgroundColor: colors.green,
+    color: colors.black,
+    borderColor: colors.black,
+    borderWidth: constants.borderWidth,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 20,
+    paddingLeft: 20
+  },
 });
 
 export default loginStyles;
