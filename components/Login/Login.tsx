@@ -32,8 +32,6 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
     await getAuthTokens();
     const expiryTime = await getData('EXPIRY_TIME');
 
-    console.log(expiryTime);
-
     if (expiryTime !== undefined) {
       const newToken = await getData('ACCESS_TOKEN');
         
@@ -44,7 +42,7 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
     } else {
       Alert.alert(
         'Vibecheck',
-        `There was an error logging in, the time retreieved = ${expiryTime}`,
+        `We could not verify your login information, please verify your internet connection and try again!`,
         [{
           text: 'Done',
           style: 'default'
