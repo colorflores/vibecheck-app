@@ -49,6 +49,8 @@ export const pauseTrack = () => {
 }
 
 export const savePlaylist = async (name, songs) => {
+  await verifyToken();
+
   let newPlaylist = null;
 
   newPlaylist = await fetch (`https://api.spotify.com/v1/users/${user.id}/playlists`, {

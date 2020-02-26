@@ -60,7 +60,7 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
       <View style={loginStyles.loginContainerOuter}>
         <View style={loginStyles.loginContainerInner}>
           <Image style={loginStyles.loginLogo} source={loginLogo}/>
-          <TouchableOpacity onPress={() => this.handleLogin()} onPressIn={() => this.setState({loginActive: true})} onPressOut={() => this.setState({loginActive: false})} activeOpacity={1} style={(loginActive ? loginStyles.loginButtonInactive : loginStyles.loginButton)}>
+          <TouchableOpacity onPress={() => this.handleLogin()} onPressIn={() => this.setState({loginActive: true})} onPressOut={() => this.setState({loginActive: false})} activeOpacity={1} style={(loginActive ? loginStyles.loginButtonActive : loginStyles.loginButtonInactive)}>
             <Text style={[generalStyles.queryText, loginStyles.loginText]}>
               Log in with Spotify
             </Text>

@@ -136,11 +136,17 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
           </View>
         </ScrollView>
         <View style={{ height: 60, backgroundColor: 'black', flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity onPress={() => this.savePlaylist()} style={{ width: '50%', height: '100%', justifyContent: 'center', flexDirection: 'row', alignContent: 'center', alignItems: 'center', padding: 14 }}>
-            <Image source={saveSpotifyIcon} style={{ height: '100%', resizeMode: 'contain' }} />
+          <TouchableOpacity onPress={() => this.savePlaylist()} style={{ width: '50%', height: '100%', justifyContent: 'center', flexDirection: 'column', alignContent: 'center', alignItems: 'center', paddingTop: 10 }}>
+            <Image source={saveSpotifyIcon} style={{ height: 30, resizeMode: 'contain' }} />
+            <Text style={[{color: 'white', fontSize: 12, marginTop: 4, fontFamily: 'worksans-regular' }]}>
+              Save to Spotify
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.sharePlaylist()} style={{ width: '50%', height: '100%', justifyContent: 'center', flexDirection: 'row', alignContent: 'center', alignItems: 'center', padding: 14 }}>
-            <Image source={shareIcon} style={{ height: '100%', resizeMode: 'contain' }} />
+          <TouchableOpacity onPress={() => this.sharePlaylist()} style={{ width: '50%', height: '100%', justifyContent: 'center', flexDirection: 'column', alignContent: 'center', alignItems: 'center', paddingTop: 10 }}>
+            <Image source={shareIcon} style={{ height: 30, resizeMode: 'contain' }} />
+            <Text style={[{color: 'white', fontSize: 12, marginTop: 4, fontFamily: 'worksans-regular' }]}>
+              Share playlist
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -38,7 +38,6 @@ const vibeCheckStyles = StyleSheet.create({
     height: 50,
     width: 50,
     backgroundColor: 'black',
-    borderRadius: 10,
     flexDirection: 'row',
     alignContent: 'center',
     justifyContent: 'center',

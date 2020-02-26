@@ -27,7 +27,7 @@ const loginStyles = StyleSheet.create({
   loginText: {
     color: colors.white
   },
-  loginButton: {
+  loginButtonInactive: {
     borderColor: colors.green,
     borderWidth: constants.borderWidth,
     paddingTop: 10,
@@ -35,10 +35,10 @@ const loginStyles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 20
   },
-  loginButtonInactive: {
+  loginButtonActive: {
     backgroundColor: colors.green,
     color: colors.black,
-    borderColor: colors.black,
+    borderColor: colors.green,
     borderWidth: constants.borderWidth,
     paddingTop: 10,
     paddingBottom: 10,
