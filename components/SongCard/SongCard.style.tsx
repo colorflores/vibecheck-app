@@ -18,12 +18,12 @@ const songCardStyles = StyleSheet.create({
   },
   songTitle: {
     fontFamily: 'worksans-regular',
-    fontSize: 17,
+    fontSize: 19,
     color: colors.black,
   },
   songArtist: {
     fontFamily: 'worksans-regular',
-    fontSize: 15,
+    fontSize: 16,
     color: colors.black,
   },
   songAlbum: {
@@ -56,8 +56,8 @@ const songCardStyles = StyleSheet.create({
   },
   division: {
     width: '100%',
-    borderTopColor: 'white',
-    borderTopWidth: 2,
+    borderTopColor: colors.black,
+    borderTopWidth: 1,
     marginTop: 4,
     marginBottom: 4
   },

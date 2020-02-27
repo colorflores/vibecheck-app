@@ -7,7 +7,7 @@ import constants from '../../styles/constats';
 const vibeCheckStyles = StyleSheet.create({
   vibecheckScroll: {
     flex: 1,
-    backgroundColor: colors.yellow
+    backgroundColor: colors.yellow,
   },
   vibecheckContainer: {
     alignContent: 'center',
@@ -25,7 +25,7 @@ const vibeCheckStyles = StyleSheet.create({
   queryBox: {
     borderColor: 'transparent',
     borderBottomColor: colors.white,
-    borderWidth: constants.borderWidth,
+    borderBottomWidth: 2,
     flexWrap: 'wrap',
     flexDirection: 'row',
     color: colors.black,
@@ -42,6 +42,7 @@ const vibeCheckStyles = StyleSheet.create({
     justifyContent: 'center',
     padding: 6,
     elevation: 8,
+    borderRadius: 10
   },
   searchIconContainer: {
     flex: 1,

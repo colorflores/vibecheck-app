@@ -119,7 +119,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
                 </View>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity style={{ width: '50%', flexDirection: 'row', alignContent: 'center', alignItems: 'center', justifyContent: 'center', height: 36, backgroundColor: 'black', marginTop: 30, elevation: 8 }}>
+            <TouchableOpacity style={{ width: '60%', flexDirection: 'row', alignContent: 'center', alignItems: 'center', justifyContent: 'center', height: 36, backgroundColor: 'black', marginTop: 30, elevation: 8, borderRadius: 10 }}>
               <Text style={{ color: 'white', fontFamily: 'worksans-light', fontStyle: 'normal', fontSize: 18 }}>
                 shuffle playlist
               </Text>
@@ -143,15 +143,15 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
           </View>
         </ScrollView>
         <View style={{ height: 60, backgroundColor: 'black', flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity onPress={() => this.savePlaylist()} style={{ width: '50%', height: '100%', justifyContent: 'center', flexDirection: 'column', alignContent: 'center', alignItems: 'center', padding: 16 }}>
-            <Image source={saveSpotifyIcon} style={{ height: '90%', resizeMode: 'contain' }} />
-            <Text style={[{ color: 'white', fontSize: 12, marginTop: 2, fontFamily: 'worksans-regular' }]}>
+          <TouchableOpacity onPress={() => this.savePlaylist()} style={{ width: '50%', height: '100%', justifyContent: 'center', flexDirection: 'column', alignContent: 'center', alignItems: 'center', marginTop: 10 }}>
+            <Image source={saveSpotifyIcon} style={{ height: 30, resizeMode: 'contain' }} />
+            <Text style={[{ color: 'white', fontSize: 12, marginTop: 4, fontFamily: 'worksans-regular' }]}>
               Save to Spotify
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.sharePlaylist()} style={{ width: '50%', height: '100%', justifyContent: 'center', flexDirection: 'column', alignContent: 'center', alignItems: 'center', padding: 16 }}>
-            <Image source={shareIcon} style={{ height: '90%', resizeMode: 'contain' }} />
-            <Text style={[{color: 'white', fontSize: 12, marginTop: 2, fontFamily: 'worksans-regular' }]}>
+          <TouchableOpacity onPress={() => this.sharePlaylist()} style={{ width: '50%', height: '100%', justifyContent: 'center', flexDirection: 'column', alignContent: 'center', alignItems: 'center', marginTop: 10 }}>
+            <Image source={shareIcon} style={{ height: 30, resizeMode: 'contain' }} />
+            <Text style={[{color: 'white', fontSize: 12, marginTop: 4, fontFamily: 'worksans-regular' }]}>
               Share playlist
             </Text>
           </TouchableOpacity>
