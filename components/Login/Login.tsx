@@ -29,28 +29,29 @@ export default class Login extends React.Component <LoginInterfaceProps, LoginIn
   handleLogin = async () => {
     const { navigate } = this.props.navigation
 
-    await getAuthTokens();
-    const expiryTime = await getData('EXPIRY_TIME');
-
-    if (expiryTime !== undefined) {
-      const newToken = await getData('ACCESS_TOKEN');
-        
-      initializeAPI(newToken);
-      navigate('Loading');
-      await wait(1000);
-      navigate('Landing');
-    } else {
-      Alert.alert(
-        'Vibecheck',
-        `We could not verify your login information, please verify your internet connection and try again!`,
-        [{
-          text: 'Done',
-          style: 'default'
-        }], { 
-          cancelable: true
-        }
-      );
-    }
+    getAuthTokens().then(async (newToken) => {
+      const expiryTime = await getData('EXPIRY_TIME');
+  
+      if (expiryTime !== undefined) {
+        const newToken = await getData('ACCESS_TOKEN');
+          
+        initializeAPI(newToken);
+        navigate('Loading');
+        await wait(1000);
+        navigate('Landing');
+      } else {
+        Alert.alert(
+          'Vibecheck',
+          `We could not verify your login information, please verify your internet connection and try again!`,
+          [{
+            text: 'Done',
+            style: 'default'
+          }], { 
+            cancelable: true
+          }
+        );
+      }
+    });
   }
 
   render() {

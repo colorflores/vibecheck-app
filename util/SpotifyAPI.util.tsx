@@ -32,7 +32,22 @@ export const initializeAPI = async (token: string) => {
 export const playTrack = async (songId: string) => {
   await verifyToken();
 
-  fetch('https://api.spotify.com/v1/me/player/play', {
+  const currDevices = await s.getMyDevices();
+  const mobile = currDevices.devices.reduce((mobile, curr) => curr.type === "Smartphone" ? mobile = curr : null);
+
+  await fetch(`https://api.spotify.com/v1/me/player`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${s.getAccessToken()}`,
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      'device_id': [mobile.id],
+      'play': true,
+    })
+  });
+
+  fetch(`https://api.spotify.com/v1/me/player/play?device_id=${mobile.id}`, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${s.getAccessToken()}`,
