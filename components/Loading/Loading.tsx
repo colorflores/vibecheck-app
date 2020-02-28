@@ -72,16 +72,19 @@ export default class Profile extends React.Component <LoadingInterfaceProps, Loa
     await wait(2000);
 
     const currentTokenTime = await getData('EXPIRY_TIME');
-    const currentToken = await getData('ACCESS_TOKEN');
     const currentDate = new Date().getTime();
 
-    if (currentTokenTime) {
-      initializeAPI(currentToken);
-
+    if (currentTokenTime !== undefined) {
       if (JSON.parse(currentTokenTime) < currentDate) {
         await refreshAuthTokens();
+        const newToken = await getData('ACCESS_TOKEN');
+        
+        initializeAPI(newToken);
         navigate('Landing');
       } else {
+        const oldToken = await getData('ACCESS_TOKEN');
+
+        initializeAPI(oldToken);
         navigate('Landing');
       }
     } else {

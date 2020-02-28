@@ -11,7 +11,7 @@ const generalStyles = StyleSheet.create({
   titleButton: {
     fontFamily: 'sail',
     fontStyle: 'normal',
-    fontSize: 30,
+    fontSize: 24,
     color: colors.white,
   },
   text: {

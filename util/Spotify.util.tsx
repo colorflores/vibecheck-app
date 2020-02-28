@@ -3,11 +3,9 @@ import { encode  } from 'base-64';
 import spotifyCredentials from '../secret';
 import { saveData, getData } from './Storage.util';
 
+globalThis.btoa = encode;
 const spotifyURL = 'https://accounts.spotify.com/authorize';
 const spotifyAPI_URL = 'https://accounts.spotify.com/api/token';
-
-globalThis.btoa = encode;
-
 const spotifyScopes = [
   'user-modify-playback-state', 
   'user-read-currently-playing', 
@@ -22,7 +20,7 @@ const spotifyScopes = [
   'user-top-read',
 ].join(' ');
 
-const getExpiryTime = (time) => new Date().getTime() + time * 1000;
+const getExpiryTime = (time : number) => new Date().getTime() + time * 1000;
 
 export const getAuthCode = async () => {
   let result;
@@ -84,7 +82,7 @@ export const refreshAuthTokens = async () => {
     const currRefreshToken = await getData('REFRESH_TOKEN');
     
     const reqConfig = {
-      method: 'post',
+      method: 'POST',
       headers: {
         Authorization: `Basic ${encodedCredentials}`,
         'Content-Type': 'application/x-www-form-urlencoded',

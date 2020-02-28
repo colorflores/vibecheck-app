@@ -15,7 +15,7 @@ const SongCard = ({ title, artist, album, albumuri = test, setActive, songId, am
     }
   })
 
-  const updateStatus = () => {
+  const updateStatus = async () => {
     setSongStatus(!songIsActive);
 
     if (!songIsActive) {
