@@ -63,21 +63,32 @@ export const pauseTrack = () => {
   s.pause();
 }
 
-export const savePlaylist = async (name, songs) => {
+export const sharePlaylist = async (name, songs) => {
+  if (latestPlaylistURL && name === latestPlaylist) {
+    return latestPlaylistURL;
+  } else {
+    await savePlaylist(name, songs)
+    return latestPlaylistURL;
+  }
+}
+
+export const savePlaylist = async (nameOfPlaylist: string, songs) => {
   await verifyToken();
 
   let newPlaylist = null;
 
-  newPlaylist = await fetch (`https://api.spotify.com/v1/users/${user.id}/playlists`, {
-    method: 'POST',
+  newPlaylist = await fetch(`https://api.spotify.com/v1/users/${user.id}/playlists`,{
+    method: 'POST', 
     headers: {
-      Authorization: `Bearer ${s.getAccessToken()}`,
-      'Content-type': 'application/json'
+      'Authorization': `Bearer ${s.getAccessToken()}`,   
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      name: name,
+      name: nameOfPlaylist
     })
-  }).then(async (res) => Promise.resolve(await res.json()))
+  }).then(async (res) => {
+    return await res.json();
+  })
 
   latestPlaylist = newPlaylist.name;
   latestPlaylistURL = newPlaylist.external_urls.spotify;
@@ -86,13 +97,4 @@ export const savePlaylist = async (name, songs) => {
   // await s.addTracksToPlaylist(newPlaylist.id, [
     
   // ])
-}
-
-export const sharePlaylist = async (name, songs) => {
-  if (latestPlaylistURL && name === latestPlaylist) {
-    return latestPlaylistURL;
-  } else {
-    await savePlaylist(name, songs)
-    return latestPlaylistURL;
-  }
 }
