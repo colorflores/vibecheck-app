@@ -27,7 +27,14 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
-    }
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vibecheck.vibecheck",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.vibecheck.vibecheck",
+      "versionCode": 2
+    },
+    "scheme": "exp"
   }
 }

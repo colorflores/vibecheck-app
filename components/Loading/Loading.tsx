@@ -8,6 +8,7 @@ import { loadAsync } from 'expo-font';
 import { LoadingInterfaceProps, LoadingInterfaceState } from '../../interfaces/Loading.interface';
 import { getData } from '../../util/Storage.util';
 import { refreshAuthTokens } from '../../util/Spotify.util';
+import { initializeAPI } from '../../util/SpotifyAPI.util';
 
 const emptyState = {
   spinValue: new Animated.Value(0),
@@ -54,23 +55,29 @@ export default class Profile extends React.Component <LoadingInterfaceProps, Loa
 
   async componentDidMount() {
     const { navigate } = this.props.navigation;
+    const { isReady } = this.state;
 
-    await loadAsync({
-      'sail': require('../../assets/fonts/Sail.ttf'),
-      'worksans-regular': require('../../assets/fonts/WorkSans-Regular.ttf'),
-      'worksans-light': require('../../assets/fonts/WorkSans-Light.ttf')
-    });
-
-    this.setState({
-      isReady: true,
-    });
+    if (!isReady) {
+      await loadAsync({
+        'sail': require('../../assets/fonts/Sail.ttf'),
+        'worksans-regular': require('../../assets/fonts/WorkSans-Regular.ttf'),
+        'worksans-light': require('../../assets/fonts/WorkSans-Light.ttf')
+      });
+  
+      this.setState({
+        isReady: true,
+      });
+    }
 
     await wait(2000);
 
     const currentTokenTime = await getData('EXPIRY_TIME');
+    const currentToken = await getData('ACCESS_TOKEN');
     const currentDate = new Date().getTime();
 
     if (currentTokenTime) {
+      initializeAPI(currentToken);
+
       if (JSON.parse(currentTokenTime) < currentDate) {
         await refreshAuthTokens();
         navigate('Landing');

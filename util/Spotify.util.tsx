@@ -19,7 +19,7 @@ const spotifyScopes = [
   'playlist-modify-public',
   'playlist-modify-private', 
   'user-read-recently-played', 
-  'user-top-read'
+  'user-top-read',
 ].join(' ');
 
 const getExpiryTime = (time) => new Date().getTime() + time * 1000;
@@ -43,6 +43,8 @@ export const getAuthTokens = async () => {
   try {
     const authorizationCode = await getAuthCode();
     const encodedCredentials = encode(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
+    const redirectUri = AuthSession.getRedirectUrl();
+
     const reqConfig = {
       method: 'POST',
       headers: {
@@ -50,7 +52,7 @@ export const getAuthTokens = async () => {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: `grant_type=authorization_code&code=${authorizationCode}&redirect_uri=${
-        spotifyCredentials.redirectUri
+        redirectUri
       }`,
     }
 

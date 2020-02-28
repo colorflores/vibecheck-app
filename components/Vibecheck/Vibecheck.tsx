@@ -13,11 +13,15 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
     this.state = {
       query: props.navigation.state.params.query,
       results: props.navigation.state.params.results.songs,
+      activeSong: null,
+      signal: (origin: number) => {
+        this.setState({ activeSong: origin })
+      }
     }
   }
 
   render() {
-    const { results, query } = this.state;
+    const { results, query, signal, activeSong } = this.state;
     const { navigation } = this.props;
 
     return (
@@ -36,17 +40,19 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
               </TouchableOpacity>
             </View>
             {(results && query) ? (
-              results.map((song) => (
+              results.map((song, index: number) => (
                 (<SongCard
-                  key={song.track_id}
+                  key={index}
                   title={song.track_name} 
                   artist={song.artist_name} 
                   album={song.genre}
-                  controlURI="test"
+                  setActive={signal}
+                  songId={song.track_id}
+                  amIActive={activeSong}
+                  listIdentifier={index}
                 />)
               ))
             ) : ''}
-            <View style={vibeCheckStyles.bottomLine} />
           </View>
         </ScrollView>
       </View>

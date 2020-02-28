@@ -5,4 +5,6 @@ export interface VibecheckInterfaceProps {
 export interface VibecheckInterfaceState {
   query: string,
   results,
+  signal: Function,
+  activeSong: number | null,
 }

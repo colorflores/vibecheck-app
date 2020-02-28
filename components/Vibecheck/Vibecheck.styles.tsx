@@ -23,13 +23,6 @@ const vibeCheckStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around'
   },
-  bottomLine: {
-    width: '40%',
-    backgroundColor: colors.white,
-    height: 10,
-    marginBottom: 30,
-    borderRadius: 10,
-  },
   queryBox: {
     borderColor: 'transparent',
     borderBottomColor: colors.white,

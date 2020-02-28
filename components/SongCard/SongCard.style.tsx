@@ -59,7 +59,22 @@ const songCardStyles = StyleSheet.create({
     borderTopWidth: 2,
     marginTop: 4,
     marginBottom: 4
-  }
+  },
+  albumShading: { 
+    position: 'absolute', 
+    backgroundColor: 'rgba(0, 0, 0, 0.1)', 
+    height: '100%', 
+    width: '100%',
+    flexDirection: 'column',
+    alignContent: 'center',
+    justifyContent: 'center',
+    alignItems: 'center' 
+  },
+  statusButton: { 
+    width: 40, 
+    height: 40, 
+    resizeMode: 'contain' 
+  },
 })
 
 export default songCardStyles;
