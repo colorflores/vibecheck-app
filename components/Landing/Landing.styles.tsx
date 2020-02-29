@@ -14,6 +14,7 @@ const landingStyles = StyleSheet.create({
   playlistButton: {
     borderColor: colors.white,
     borderWidth: constants.borderWidth,
+    borderRadius: constants.borderRadius,
     paddingTop: 10,
     paddingBottom: 10,
     paddingRight: 20,

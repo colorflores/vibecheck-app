@@ -97,7 +97,7 @@ export default class Menu extends React.Component<MenuInterfaceProps,MenuInterfa
           <TouchableOpacity onPressIn={this.changeContent}>
             <Image style={{ width: 50, resizeMode: 'contain' }} source={(state.routeName === "Landing" && !showDropBox ? darkBurger : burger)} />
           </TouchableOpacity>
-          <Image style={{ width:180, resizeMode: 'contain', marginLeft: 4 }} source={(state.routeName === "Landing" && !showDropBox ? menuLogoLight : menuLogo)} />
+          {(state.routeName === "Landing" && !showDropBox)? null: (<Image style={{ width:180, resizeMode: 'contain', marginLeft: 4 }} source={(state.routeName === "Landing" && !showDropBox ? menuLogoLight : menuLogo)} />)}
           <View style={{ alignItems: 'flex-end', alignContent: 'flex-end', flex: 1 }}>
             <TouchableOpacity onPressIn={() => this.goToLanding(navigate)}>
               <Image style={{ width: 45, height: 45, resizeMode: 'contain' }} source={(state.routeName === "Landing" && !showDropBox ? menuIconLight : menuIcon)} />
