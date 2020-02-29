@@ -98,3 +98,23 @@ export const savePlaylist = async (nameOfPlaylist: string, songs) => {
     
   // ])
 }
+
+export const getProfileData = () =>{
+  return user
+}
+
+ 
+export const getTopArtists = async () => { 
+  await verifyToken();
+
+  let topArtist = await fetch('https://api.spotify.com/v1/me/top/artists', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${s.getAccessToken()}`,
+    },
+  }).then(async (res) => {
+    return await res.json()
+  })
+  // console.log(topArtist.items[0].name)
+  return topArtist.items[0].name
+};

@@ -4,7 +4,7 @@ import profileStyles from './Profile.styles';
 import personLogo from '../../assets/img/profile_icon.png';
 import thumbs from '../../assets/img/100.png';
 import Menu from '../Menu/Menu';
-
+import {getProfileData, getTopArtists} from '../../util/SpotifyAPI.util';
 import { ProfileInterfaceProps, ProfileInterfaceState } from '../../interfaces/Profile.interface';
 
 const emptyState = {
@@ -21,6 +21,12 @@ export default class Profile extends React.Component<ProfileInterfaceProps,Profi
     }
   };
 
+  async componentDidMount() {
+    const topArtist = await getTopArtists();
+
+    this.setState({ topArtist: topArtist })
+  }
+
   changeColor = () => { 
     if(emptyState.vibe==5){ emptyState.vibe = -1;}
 
@@ -28,20 +34,23 @@ export default class Profile extends React.Component<ProfileInterfaceProps,Profi
   }
   
   render() {
-    const {vibe, vibeColors} = this.state;
+    const {vibe, vibeColors, topArtist} = this.state;
     const { navigation } = this.props;
 
     return (
-      <View style={{ flex: 1, alignContent: 'center', flexDirection: 'column'}}>
+      <View style={{ flex: 1, alignContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
         <Menu navigation={navigation} />
         <View style={profileStyles.profile}>
           <View style={[profileStyles.middleContainer]}>
             <TouchableOpacity onPress={this.changeColor}>
-              <Image style={{width:200, height: 300, resizeMode: 'contain' }} source={personLogo} />
-              <Text style={[profileStyles.text, {color:vibeColors[vibe]}]}>Nathan's Vibe</Text>  
+              {getProfileData().images.length!==0 ? 
+              (<Image style={{width:200, height: 300, resizeMode: 'contain' }} source={{uri:getProfileData().images[0].url}} />) 
+              : null}
+              <Text style={[profileStyles.text, {color:vibeColors[vibe]}]}>{`${getProfileData().display_name}'s vibe`}</Text>  
             </TouchableOpacity>
-          </View>
-          <View style={[profileStyles.lowerContainer]}>
+          </View>   
+          <Text style={[profileStyles.text,{marginTop: 20}]}>{`Your favorite artist: ${topArtist}`}</Text>  
+          {/* <View style={[profileStyles.lowerContainer]}>
             <View style={profileStyles.elementMargin}>
               <Image style={{width:50, height: 50, resizeMode: 'contain' }} source={thumbs} />
               <Image style={{width:50, height: 50, resizeMode: 'contain' }} source={thumbs} />
@@ -54,7 +63,8 @@ export default class Profile extends React.Component<ProfileInterfaceProps,Profi
               <Image style={{width:50, height: 50, resizeMode: 'contain' }} source={thumbs} />
               <Image style={{width:50, height: 50, resizeMode: 'contain' }} source={thumbs} />
             </View>
-          </View>
+          </View> */}
+
         </View>
       </View>
     );

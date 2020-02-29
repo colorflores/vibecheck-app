@@ -33,7 +33,8 @@ const loginStyles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     paddingRight: 20,
-    paddingLeft: 20
+    paddingLeft: 20,
+    borderRadius: constants.borderRadius
   },
   loginButtonActive: {
     backgroundColor: colors.green,
