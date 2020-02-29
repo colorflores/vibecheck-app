@@ -38,12 +38,14 @@ export default class Profile extends React.Component<ProfileInterfaceProps,Profi
     const { navigation } = this.props;
 
     return (
-      <View style={{ flex: 1, alignContent: 'center', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{ flex: 1, alignContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
         <Menu navigation={navigation} />
         <View style={profileStyles.profile}>
           <View style={[profileStyles.middleContainer]}>
             <TouchableOpacity onPress={this.changeColor}>
-    {getProfileData().images.length!==0? (<Image style={{width:200, height: 300, resizeMode: 'contain' }} source={{uri:getProfileData().images[0].url}} />): null}
+              {getProfileData().images.length!==0 ? 
+              (<Image style={{width:200, height: 300, resizeMode: 'contain' }} source={{uri:getProfileData().images[0].url}} />) 
+              : null}
               <Text style={[profileStyles.text, {color:vibeColors[vibe]}]}>{`${getProfileData().display_name}'s vibe`}</Text>  
             </TouchableOpacity>
           </View>   
