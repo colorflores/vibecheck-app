@@ -130,3 +130,18 @@ export const getSongQuery = async (queryString) => {
   })
   return songResults
 };
+
+export const getSongInfo = async (songID) => {
+  await verifyToken();
+  
+  let songInfo = await fetch(`https://api.spotify.com/v1/tracks/${songID}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${s.getAccessToken()}`,
+    },
+  }).then(async (res) => {
+    return await res.json()
+  })
+
+  return songInfo;
+}
