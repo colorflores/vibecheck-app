@@ -64,6 +64,7 @@ const menuStyles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     position: 'absolute',
+    paddingRight: 30,
     top: 70,
     // borderColor: 'blue',
     // borderWidth: 2
