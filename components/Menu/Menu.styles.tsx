@@ -3,13 +3,6 @@ import colors from '../../styles/colors';
 import constants from '../../styles/constats';
 
 const menuStyles = StyleSheet.create({
-  menu: {
-    backgroundColor: colors.black,
-    flex: 0.1,
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    padding: 20
-  },
   dotStyle:{
     flexDirection: 'column',
     alignItems: 'center',
@@ -18,58 +11,68 @@ const menuStyles = StyleSheet.create({
     height: 30,
     resizeMode: 'contain'
   },
-  menuActive: {
+  menuHeader: {
     backgroundColor: colors.black,
     flexDirection: 'column',
     alignItems: 'flex-start',
     padding: 20,
+    width: '100%'
   },
   landing: {
     backgroundColor: colors.yellow,
   },
-  upper: { 
+  menuHeaderItems: {
     flexDirection: 'row', 
     height: 50,
     alignItems: 'center',
-  },
-  upperActive: {
-    flexDirection: 'row', 
-    height: 50,
-    alignItems: 'center',
+    width: '100%'
   },
   body: {
     height: '100%', 
     flexDirection: 'column', 
     alignItems: 'center',
     alignContent: 'center',
-    left: 40,
-    top: 80
+    justifyContent: 'flex-start',
+    width: '100%',
   },
   option: {
     flexDirection: 'row', 
     alignItems: 'center',
     justifyContent: 'center',
     alignContent: 'center',
-    position: 'absolute',
   },
   text: {
     fontFamily: 'worksans-regular',
+    fontStyle: 'normal',
+    fontSize: 26,
+    color: colors.white,
+    textAlign: 'center',
+    marginLeft: 10
+  },
+  menuContainer: {
+    width: '80%',
+    backgroundColor: colors.black,
+    alignItems: 'flex-start',
+    alignContent: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    top: 60
+  },
+  routeText: {
+    fontFamily: 'worksans-light',
     fontStyle: 'normal',
     fontSize: 25,
     color: colors.white,
     textAlign: 'center',
     left: 20,
   },
-  menuContainer: {
-    width: '85%',
-    backgroundColor: colors.black,
-    alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
+  rightIcon: { 
+    alignItems: 'flex-end', 
+    alignContent: 'flex-end', 
+    flex: 1 
   },
   elementMargin: {
-    marginBottom: 70,
+    marginBottom: 40,
   }
 })
 

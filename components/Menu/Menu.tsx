@@ -92,19 +92,19 @@ export default class Menu extends React.Component<MenuInterfaceProps,MenuInterfa
     const { navigate, state } = this.props.navigation;
 
     return (
-      <View style={[menuStyles.menuActive, (state.routeName === "Landing" && !showDropBox ? menuStyles.landing : null)]}>
-        <View style={menuStyles.upperActive}>
+      <View style={[menuStyles.menuHeader, (state.routeName === "Landing" && !showDropBox ? menuStyles.landing : null)]}>
+        <View style={menuStyles.menuHeaderItems}>
           <TouchableOpacity onPressIn={this.changeContent}>
             <Image style={{ width: 50, resizeMode: 'contain' }} source={(state.routeName === "Landing" && !showDropBox ? darkBurger : burger)} />
           </TouchableOpacity>
-          <Image style={{ width:180, resizeMode: 'contain', marginLeft: 4 }} source={(state.routeName === "Landing" && !showDropBox ? menuLogoLight : menuLogo)} />
-          <View style={{ alignItems: 'flex-end', alignContent: 'flex-end', flex: 1 }}>
+          {(!showDropBox && state.routeName !== "Landing")? (<Text style={menuStyles.routeText}> {state.routeName} </Text>): 
+          (<Image style={{ width:180, resizeMode: 'contain', marginLeft: 4 }} source={(!showDropBox ? null: menuLogo)} />)}
+          <View style={menuStyles.rightIcon}>
             <TouchableOpacity onPressIn={() => this.goToLanding(navigate)}>
               <Image style={{ width: 45, height: 45, resizeMode: 'contain' }} source={(state.routeName === "Landing" && !showDropBox ? menuIconLight : menuIcon)} />
             </TouchableOpacity>
           </View>
         </View>
-
         {showDropBox ? 
           <Animated.View style={[{opacity: animation}, menuStyles.body]}>
             <View style={menuStyles.menuContainer}>
