@@ -10,6 +10,8 @@ const landingStyles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     alignContent: 'center',
+    // borderColor: 'blue',
+    // borderWidth: 2
   },
   playlistButton: {
     borderColor: colors.white,
@@ -21,9 +23,8 @@ const landingStyles = StyleSheet.create({
     paddingLeft: 20,
   },
   queryBox: {
-    borderColor: 'transparent',
     borderBottomColor: colors.white,
-    borderWidth: constants.borderWidth,
+    borderBottomWidth: constants.borderWidth,
     flexWrap: 'wrap',
     flexDirection: 'row',
     color: colors.black,
@@ -38,11 +39,13 @@ const landingStyles = StyleSheet.create({
     resizeMode: 'contain',
   },
   landingContainer: {
-    flex: 1,
+    flex: 0.95,
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
     width: '85%',
+    // borderColor: 'red',
+    // borderWidth: 2,
   },
   elementMargin: {
     marginBottom: 55,

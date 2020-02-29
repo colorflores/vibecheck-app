@@ -38,13 +38,13 @@ const loginStyles = StyleSheet.create({
   },
   loginButtonActive: {
     backgroundColor: colors.green,
-    color: colors.black,
     borderColor: colors.green,
     borderWidth: constants.borderWidth,
     paddingTop: 10,
     paddingBottom: 10,
     paddingRight: 20,
-    paddingLeft: 20
+    paddingLeft: 20,
+    borderRadius: constants.borderRadius
   },
 });
 

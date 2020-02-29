@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, TouchableOpacity, Image, ScrollView, Text, Alert, Share } from 'react-native';
+import { View, TextInput, TouchableOpacity, Image, ScrollView, Text, Alert, Share, Keyboard } from 'react-native';
 import { VibecheckInterfaceProps, VibecheckInterfaceState } from '../../interfaces/Vibecheck.interface';
 import generalStyles from '../../styles/generalStyles';
 import vibeCheckStyles from './Vibecheck.styles';
@@ -100,6 +100,13 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
     })
   }
 
+  handleInput = (tap) => {
+    if (tap.nativeEvent.key == 'Enter'){
+      Keyboard.dismiss();
+      // this.vibecheck();
+    }
+  }
+
   render() {
     const { results, query, signal, activeSong } = this.state;
     const { navigation } = this.props;
@@ -110,7 +117,16 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
         <ScrollView style={vibeCheckStyles.vibecheckScroll}>
           <View style={vibeCheckStyles.vibecheckContainer}>
             <View style={vibeCheckStyles.vibecheckHeader}>
-              <TextInput multiline={true} style={[vibeCheckStyles.queryBox, generalStyles.queryText]} value={query} onChangeText={input => {this.setState({ query: input })}} />
+              <TextInput 
+                onKeyPress={this.handleInput}  
+                multiline={true} 
+                style={[vibeCheckStyles.queryBox, generalStyles.queryText]} 
+                value={query} 
+                onChangeText={input => {
+                  if (input[input.length - 1] !== '\n') {
+                    this.setState({ query: input })                  }
+                }}
+              />
               <TouchableOpacity onPress={() => this.vibecheck()}>
                 <View style={vibeCheckStyles.searchContainer}>
                   <View style={vibeCheckStyles.searchIconContainer}>

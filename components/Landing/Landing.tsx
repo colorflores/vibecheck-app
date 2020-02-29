@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Image, Keyboard, RefreshControlComponent } from 'react-native';
 import { LandingInterfaceProps, LandingInterfaceState } from '../../interfaces/Landing.interface';
 import landingStyles from './Landing.styles';
 import generalStyles from '../../styles/generalStyles';
@@ -8,10 +8,13 @@ import Menu from '../Menu/Menu';
 import { saveData, getData, deleteData as yeet } from '../../util/Storage.util';
 
 const sampleQueries = [
+  "💯🔥🔥",
   "I'm falling in love",
   "Just got to a party",
-  "My friend is getting married",
+  "❤️🥰🌹",
+  "🎉🎉🥳😎",
   "Trying to study",
+  "nature ❄️🌲"
 ]
 
 export default class Landing extends React.Component<LandingInterfaceProps, LandingInterfaceState> {
@@ -81,6 +84,12 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
     }
   }
 
+  handleInput = (tap) => {
+    if (tap.nativeEvent.key == 'Enter'){
+      Keyboard.dismiss();
+    }
+  }
+
   render() {
     const { placeHolder, query } = this.state;
     const { navigation } = this.props;
@@ -90,11 +99,16 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
         <Menu navigation={navigation} />
         <View style={landingStyles.landingContainer}>
           <Text style={[generalStyles.title, landingStyles.elementMargin]}>What's the story?</Text>
-          <TextInput 
+          <TextInput
+            onKeyPress={this.handleInput} 
             onFocus={tap => this.activateText(tap)} 
-            onChangeText={input => this.updateQuery(input)} 
+            onChangeText={input => {
+              if (input[input.length - 1] !== '\n') {
+                this.updateQuery(input)
+              }
+            }} 
             value={query} placeholderTextColor="rgba(0,0,0,0.3)" 
-            placeholder={placeHolder} 
+            placeholder={placeHolder}
             multiline={true}
             style={[generalStyles.queryText, landingStyles.elementMargin, landingStyles.queryBox]}
           />

@@ -2,8 +2,10 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import colors from '../../styles/colors';
 import constants from '../../styles/constats';
 
+// ?The container styles that are commented out are solely for debugging purposes.
+
 const menuStyles = StyleSheet.create({
-  dotStyle:{
+  dotStyle: {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -14,9 +16,12 @@ const menuStyles = StyleSheet.create({
   menuHeader: {
     backgroundColor: colors.black,
     flexDirection: 'column',
-    alignItems: 'flex-start',
-    padding: 20,
-    width: '100%'
+    alignItems: 'center',
+    paddingTop: 20,
+    paddingBottom: 20,
+    width: '100%',
+    // borderColor: 'yellow',
+    // borderWidth: 2
   },
   landing: {
     backgroundColor: colors.yellow,
@@ -25,7 +30,9 @@ const menuStyles = StyleSheet.create({
     flexDirection: 'row', 
     height: 50,
     alignItems: 'center',
-    width: '100%'
+    width: '85%',
+    // borderColor: 'pink',
+    // borderWidth: 2
   },
   body: {
     height: '100%', 
@@ -34,6 +41,8 @@ const menuStyles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'flex-start',
     width: '100%',
+    // borderColor: 'red',
+    // borderWidth: 2
   },
   option: {
     flexDirection: 'row', 
@@ -50,13 +59,14 @@ const menuStyles = StyleSheet.create({
     marginLeft: 10
   },
   menuContainer: {
-    width: '80%',
     backgroundColor: colors.black,
     alignItems: 'flex-start',
     alignContent: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    top: 60
+    top: 70,
+    // borderColor: 'blue',
+    // borderWidth: 2
   },
   routeText: {
     fontFamily: 'worksans-light',
