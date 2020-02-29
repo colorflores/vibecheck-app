@@ -33,7 +33,7 @@ export const playTrack = async (songId: string) => {
   await verifyToken();
 
   const currDevices = await s.getMyDevices();
-  const mobile = currDevices.devices.reduce((mobile, curr) => curr.type === "Smartphone" ? mobile = curr : null);
+  const mobile = await currDevices.devices.reduce((mobile, curr) => curr.type === "Smartphone" ? mobile = curr : null);
 
   await fetch(`https://api.spotify.com/v1/me/player`, {
     method: 'PUT',
@@ -103,7 +103,6 @@ export const getProfileData = () =>{
   return user
 }
 
- 
 export const getTopArtists = async () => { 
   await verifyToken();
 
@@ -115,6 +114,19 @@ export const getTopArtists = async () => {
   }).then(async (res) => {
     return await res.json()
   })
-  // console.log(topArtist.items[0].name)
   return topArtist.items[0].name
+};
+
+export const getSongQuery = async (queryString) => { 
+  await verifyToken();
+
+  let songResults= await fetch(`http://vibecheckrandomrest.westus.azurecontainer.io:5000/search/${encodeURI(queryString)}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${s.getAccessToken()}`,
+    },
+  }).then(async (res) => {
+    return await res.json()
+  })
+  return songResults
 };
