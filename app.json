@@ -11,7 +11,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/img/icon_app.png",
+    "icon": "./assets/img/app_icon.png",
     "splash": {
       "image": "./assets/img/splash.png",
       "resizeMode": "contain",
@@ -33,7 +33,11 @@
     },
     "android": {
       "package": "com.vibecheck.vibecheck",
-      "versionCode": 2
+      "versionCode": 2,
+      "icon": "./assets/img/app_icon.png",
+      "adaptiveIcon": {
+        "backgroundColor": "#FFC300"
+      }
     },
     "scheme": "exp"
   }
