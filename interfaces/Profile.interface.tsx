@@ -5,5 +5,6 @@ export interface ProfileInterfaceProps {
   export interface ProfileInterfaceState {
     vibe,
     vibeColors,
+    topArtist: string,
     status
 }

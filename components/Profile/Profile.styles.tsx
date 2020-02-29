@@ -10,11 +10,12 @@ const profileStyles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
+    width: '85%'
   },
   text: {
     fontFamily: 'worksans-regular',
     fontStyle: 'normal',
-    fontSize: 25,
+    fontSize: 20,
     color: colors.white,
     textAlign: 'center'
   },
@@ -23,14 +24,12 @@ const profileStyles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    width: '40%',
   },
   lowerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    width: '40%',
   },
   elementMargin: {
     margin: 25,
