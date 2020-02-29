@@ -68,6 +68,14 @@ const menuStyles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
   },
+  routeText: {
+    fontFamily: 'worksans-light',
+    fontStyle: 'normal',
+    fontSize: 25,
+    color: colors.white,
+    textAlign: 'center',
+    left: 20,
+  },
   elementMargin: {
     marginBottom: 70,
   }
