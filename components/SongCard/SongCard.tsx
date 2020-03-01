@@ -4,11 +4,12 @@ import test from '../../assets/img/test.jpg';
 import songCardStyles from './SongCard.style';
 import playButton from '../../assets/img/play_button.png';
 import pauseButton from '../../assets/img/pause_button.png';
-import { playTrack, pauseTrack, getSongInfo } from '../../util/SpotifyAPI.util';
+import noArt from '../../assets/img/noArt.png';
+import { playTrack, pauseTrack, getAlbumArt } from '../../util/SpotifyAPI.util';
 
-const SongCard = ({ title, artist, album, albumuri = test, setActive, songId, amIActive, listIdentifier }) => {
+const SongCard = ({ title, artist, album, albumuri = test, setActive, songId, amIActive, listIdentifier, albumArt }) => {
   const [songIsActive, setSongStatus] = useState(false);
-  const [songAlbum, setSongAlbum] = useState({albumUrl: ''});
+  const [songAlbum, setSongAlbum] = useState({albumUrl: null});
 
   useEffect(() => {
     if (listIdentifier !== amIActive && songIsActive) {
@@ -17,16 +18,14 @@ const SongCard = ({ title, artist, album, albumuri = test, setActive, songId, am
   });
 
   useEffect(() => {
-    // const fetchSong = async () => {
-    //   if (listIdentifier === 1) {
-    //     const albumInfo = await getSongInfo(songId);
-    //     setSongAlbum(albumInfo.album.images[1].url);
-    //   }
-    // }
+    const fetchSong = async () => {
+      const albumArt = await getAlbumArt(artist, album);
+      setSongAlbum({ albumUrl: albumArt });
+    }
 
-    // if (!songAlbum.albumUrl) {
-    //   fetchSong();
-    // }
+    if (!songAlbum.albumUrl) {
+      fetchSong();
+    }
   });
 
   const updateStatus = async () => {
@@ -41,28 +40,30 @@ const SongCard = ({ title, artist, album, albumuri = test, setActive, songId, am
   }
 
   return (
-    <View style={songCardStyles.songCardContainer}>
-      <View style={songCardStyles.albumContainer}>
-        <Image source={test} style={songCardStyles.albumImage} />
-        <TouchableOpacity onPress={() => updateStatus()} style={songCardStyles.albumShading}>
-          <Image style={songCardStyles.statusButton} source={(songIsActive ? pauseButton : playButton)} />
-        </TouchableOpacity>
-      </View>
-      <View style={songCardStyles.songContainerOutter}>
-        <View style={songCardStyles.songContainerInner}>
-          <Text style={songCardStyles.songTitle}>
-            {title}
-          </Text>
-          <View style={songCardStyles.division} />
-          <Text style={songCardStyles.songArtist}>
-            {artist}
-          </Text>
-          <Text style={songCardStyles.songAlbum}>
-            {album}
-          </Text>
+    (songAlbum.albumUrl !== null ? (
+      <View style={songCardStyles.songCardContainer}>
+        <View style={songCardStyles.albumContainer}>
+          <Image source={songAlbum.albumUrl !== null ? {uri:songAlbum.albumUrl} : noArt} style={songCardStyles.albumImage} />
+          <TouchableOpacity onPress={() => updateStatus()} style={songCardStyles.albumShading}>
+            <Image style={songCardStyles.statusButton} source={(songIsActive ? pauseButton : playButton)} />
+          </TouchableOpacity>
+        </View>
+        <View style={songCardStyles.songContainerOutter}>
+          <View style={songCardStyles.songContainerInner}>
+            <Text style={songCardStyles.songTitle}>
+              {title}
+            </Text>
+            <View style={songCardStyles.division} />
+            <Text style={songCardStyles.songArtist}>
+              {artist}
+            </Text>
+            <Text style={songCardStyles.songAlbum}>
+              {album}
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
+    ) : null) 
   );
 };
 

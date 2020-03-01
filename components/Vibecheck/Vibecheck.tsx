@@ -138,6 +138,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
                     songId={song["track_id.1"]} //parameter was "track_id.1 not track_id"
                     amIActive={activeSong}
                     listIdentifier={index}
+                    albumArt="https://is3-ssl.mzstatic.com/image/thumb/Music18/v4/8a/60/bb/8a60bbbb-ac66-4a95-a195-383a1e9f3ccd/source/400x400bb.jpg"
                   />)
                 ))
               ) : null}

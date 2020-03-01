@@ -153,17 +153,17 @@ export const getSongQuery = async (queryString) => {
   return songResults
 };
 
-export const getSongInfo = async (songID) => {
+export const getAlbumArt = async (artist: string, album: string) => {
   await verifyToken();
-  
-  let songInfo = await fetch(`https://api.spotify.com/v1/tracks/${songID}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${s.getAccessToken()}`,
-    },
-  }).then(async (res) => {
-    return await res.json()
-  })
 
-  return songInfo;
+  return await fetch(`https://itunes.apple.com/search?term=${artist.replace(' ', '+')}+${album.replace(' ', '+')}&limit=1&entity=song`, {
+    method: 'GET',
+  }).then(async res => {
+    const result = await res.json();
+    if (result.results) {
+      return result.results[0].artworkUrl100.replace('100x100bb', '400x400bb');
+    } else {
+      return null;
+    }
+  });
 }

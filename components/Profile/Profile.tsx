@@ -36,7 +36,7 @@ export default class Profile extends React.Component<ProfileInterfaceProps,Profi
   render() {
     const {vibe, vibeColors, topArtist} = this.state;
     const { navigation } = this.props;
-
+    
     return (
       <View style={{ flex: 1, alignContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
         <Menu navigation={navigation} />
