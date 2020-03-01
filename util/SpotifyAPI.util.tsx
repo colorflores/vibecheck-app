@@ -1,7 +1,6 @@
 import { getData } from './Storage.util';
 import { refreshAuthTokens } from './Spotify.util';
 import Spotify from 'spotify-web-api-js';
-import { base64Img } from './CoverImage';
 
 const s = new Spotify();
 let user = null;
@@ -94,7 +93,7 @@ export const savePlaylist = async (nameOfPlaylist: string, songs) => {
   latestPlaylist = newPlaylist.name;
   latestPlaylistURL = newPlaylist.external_urls.spotify;
   
-  await fetch(`https://api.spotify.com/v1/playlists/${newPlaylist.id}/tracks`,{
+  fetch(`https://api.spotify.com/v1/playlists/${newPlaylist.id}/tracks`,{
     method: 'POST', 
     headers: {
       'Authorization': `Bearer ${s.getAccessToken()}`,   
@@ -109,14 +108,23 @@ export const savePlaylist = async (nameOfPlaylist: string, songs) => {
     return await res.json();
   });
 
-  await fetch(`https://api.spotify.com/v1/playlists/${newPlaylist.id}/images`, {
-    method: 'PUT',
-    headers: {
-      'Authorization': `Bearer ${s.getAccessToken()}`,   
-      'Content-Type': 'image/jpeg'
-    },
-    body: base64Img
-  });
+  await fetch('https://vibecheck.ca/coverImage.txt', {
+    method: 'GET',
+    headers : {
+      'Content-Type': 'text/plain'
+    }
+  }).then(async (res) => {
+    const encodedImage = await res.text();
+
+    await fetch(`https://api.spotify.com/v1/playlists/${newPlaylist.id}/images`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${s.getAccessToken()}`,   
+        'Content-Type': 'image/jpeg'
+      },
+      body: encodedImage
+    });
+  })
 }
 
 export const getProfileData = () =>{
