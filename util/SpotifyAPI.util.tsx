@@ -108,7 +108,7 @@ export const savePlaylist = async (nameOfPlaylist: string, songs) => {
     return await res.json();
   });
 
-  await fetch('https://vibecheck.ca/coverImage.txt', {
+  fetch('https://vibecheck.ca/coverImage.txt', {
     method: 'GET',
     headers : {
       'Content-Type': 'text/plain'
@@ -116,7 +116,7 @@ export const savePlaylist = async (nameOfPlaylist: string, songs) => {
   }).then(async (res) => {
     const encodedImage = await res.text();
 
-    await fetch(`https://api.spotify.com/v1/playlists/${newPlaylist.id}/images`, {
+    fetch(`https://api.spotify.com/v1/playlists/${newPlaylist.id}/images`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${s.getAccessToken()}`,   
