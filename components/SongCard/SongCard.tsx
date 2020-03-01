@@ -6,7 +6,7 @@ import pauseButton from '../../assets/img/pause_button.png';
 import noArt from '../../assets/img/noArt.png';
 import { playTrack, pauseTrack, getAlbumArt } from '../../util/SpotifyAPI.util';
 
-const SongCard = ({ title, artist, album, albumuri = test, setActive, songId, amIActive, listIdentifier, albumArt }) => {
+const SongCard = ({ title, artist, album, setActive, songId, amIActive, listIdentifier }) => {
   const [songIsActive, setSongStatus] = useState(false);
   const [songAlbum, setSongAlbum] = useState({albumUrl: null});
 

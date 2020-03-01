@@ -77,7 +77,7 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
 
     if (query !== '') {
       await saveData('LATEST_QUERY', query);
-      navigate('Vibecheck')
+      navigate('Vibecheck');
     }
   }
 

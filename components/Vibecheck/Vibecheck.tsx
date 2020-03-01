@@ -28,30 +28,12 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
 
   async componentDidMount() {
     const latestQuery = await getData('LATEST_QUERY');
-    let latestResults = null;
 
-    const songResults = await getSongQuery(latestQuery);
-    
     if (latestQuery !== undefined) {
-      this.setState({
-        query: latestQuery,
-        latestQuery,
-      });
-
-      latestResults = await getData('LATEST_RESULT');
-
-      if (latestResults !== undefined) {
-        this.setState({
-          results: JSON.parse(latestResults),
-        });
-      } else {
-        //? If latest data doesn't exist call api and save those results
-        await saveData('LATEST_RESULT', JSON.stringify(songResults))
-        this.setState({
-          results: songResults
-        })
-      }
+      this.setState({ query: latestQuery });
     }
+
+    this.vibecheck();
   }
 
   vibecheck = async () => {
@@ -59,11 +41,12 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
 
     if (query !== latestQuery) {
       //? API calls go here 
-      const songResults = await getSongQuery(latestQuery);
-      await saveData("LATEST_RESUT", JSON.stringify(songResults));
+      const songResults = await getSongQuery(query);
+      await saveData('LATEST_RESUlT', JSON.stringify(songResults));
       await saveData('LATEST_QUERY', query);
 
       this.setState({
+        query: query,
         latestQuery: query,
         results: songResults
       });
@@ -138,7 +121,6 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
                     songId={song["track_id.1"]} //parameter was "track_id.1 not track_id"
                     amIActive={activeSong}
                     listIdentifier={index}
-                    albumArt="https://is3-ssl.mzstatic.com/image/thumb/Music18/v4/8a/60/bb/8a60bbbb-ac66-4a95-a195-383a1e9f3ccd/source/400x400bb.jpg"
                   />)
                 ))
               ) : null}
