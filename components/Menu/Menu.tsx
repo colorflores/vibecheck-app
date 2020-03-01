@@ -26,7 +26,7 @@ const menuItem = (navFunction, target, dotSrc, text) => {
   if (target === "LogOut") {
     return (
       <View style={menuStyles.elementMargin} key={`${text}-id`}>
-        <TouchableOpacity onPressIn={async () => {
+        <TouchableOpacity onPress={async () => {
           await yeet('ACCESS_TOKEN');
           await yeet('REFRESH_TOKEN');
           await yeet('EXPIRY_TIME');
@@ -41,7 +41,7 @@ const menuItem = (navFunction, target, dotSrc, text) => {
   } else {
     return (
       <View style={menuStyles.elementMargin} key={`${text}-id`}>
-        <TouchableOpacity onPressIn={() => navFunction(target)} style={menuStyles.option}>
+        <TouchableOpacity onPress={() => navFunction(target)} style={menuStyles.option}>
           <Image style={menuStyles.dotStyle} source={dotSrc} />
           <Text style={menuStyles.text}>{text}</Text>
         </TouchableOpacity>
@@ -94,13 +94,13 @@ export default class Menu extends React.Component<MenuInterfaceProps,MenuInterfa
     return (
       <View style={[menuStyles.menuHeader, (state.routeName === "Landing" && !showDropBox ? menuStyles.landing : null)]}>
         <View style={menuStyles.menuHeaderItems}>
-          <TouchableOpacity onPressIn={this.changeContent}>
+          <TouchableOpacity onPress={this.changeContent}>
             <Image style={{ width: 50, resizeMode: 'contain' }} source={(state.routeName === "Landing" && !showDropBox ? darkBurger : burger)} />
           </TouchableOpacity>
           {(!showDropBox && state.routeName !== "Landing")? (<Text style={menuStyles.routeText}> {state.routeName} </Text>): 
           (<Image style={{ width:180, resizeMode: 'contain', marginLeft: 4 }} source={(!showDropBox ? null: menuLogo)} />)}
           <View style={menuStyles.rightIcon}>
-            <TouchableOpacity onPressIn={() => this.goToLanding(navigate)}>
+            <TouchableOpacity onPress={() => this.goToLanding(navigate)}>
               <Image style={{ width: 45, height: 45, resizeMode: 'contain' }} source={(state.routeName === "Landing" && !showDropBox ? menuIconLight : menuIcon)} />
             </TouchableOpacity>
           </View>

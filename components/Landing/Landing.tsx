@@ -1,11 +1,11 @@
 import React from 'react';
-import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Image, processColor } from 'react-native';
 import { LandingInterfaceProps, LandingInterfaceState } from '../../interfaces/Landing.interface';
 import landingStyles from './Landing.styles';
 import generalStyles from '../../styles/generalStyles';
 import playButton from '../../assets/img/play.png';
 import Menu from '../Menu/Menu';
-import { saveData, getData, deleteData as yeet } from '../../util/Storage.util';
+import { saveData, deleteData as yeet } from '../../util/Storage.util';
 
 const sampleQueries = [
   "I'm falling in love",

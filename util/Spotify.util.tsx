@@ -1,6 +1,6 @@
 import { AuthSession } from 'expo';
 import { encode  } from 'base-64';
-import spotifyCredentials from '../secret';
+import { APP_CLIENT_ID, APP_CLIENT_SECRET } from 'react-native-dotenv';
 import { saveData, getData } from './Storage.util';
 
 globalThis.btoa = encode;
@@ -18,6 +18,7 @@ const spotifyScopes = [
   'playlist-modify-private', 
   'user-read-recently-played', 
   'user-top-read',
+  'ugc-image-upload',
 ].join(' ');
 
 const getExpiryTime = (time : number) => new Date().getTime() + time * 1000;
@@ -28,7 +29,7 @@ export const getAuthCode = async () => {
 
   try {
     result = await AuthSession.startAsync({
-      authUrl: `${spotifyURL}?response_type=code&client_id=${spotifyCredentials.clientId}&scope=${encodeURIComponent(spotifyScopes)}&redirect_uri=${encodeURIComponent(redirectUrl)}`
+      authUrl: `${spotifyURL}?response_type=code&client_id=${APP_CLIENT_ID}&scope=${encodeURIComponent(spotifyScopes)}&redirect_uri=${encodeURIComponent(redirectUrl)}`
     });
   } catch (err) {
     console.error(err)
@@ -40,7 +41,7 @@ export const getAuthCode = async () => {
 export const getAuthTokens = async () => {
   try {
     const authorizationCode = await getAuthCode();
-    const encodedCredentials = encode(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
+    const encodedCredentials = encode(`${APP_CLIENT_ID}:${APP_CLIENT_SECRET}`);
     const redirectUri = AuthSession.getRedirectUrl();
 
     const reqConfig = {
@@ -78,7 +79,7 @@ export const getAuthTokens = async () => {
 
 export const refreshAuthTokens = async () => {
   try {
-    const encodedCredentials = encode(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
+    const encodedCredentials = encode(`${APP_CLIENT_ID}:${APP_CLIENT_SECRET}`);
     const currRefreshToken = await getData('REFRESH_TOKEN');
     
     const reqConfig = {
