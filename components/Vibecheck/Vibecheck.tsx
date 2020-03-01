@@ -28,9 +28,14 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
 
   async componentDidMount() {
     const latestQuery = await getData('LATEST_QUERY');
+    const latestResult = await getData('LATEST_RESULT');
 
     if (latestQuery !== undefined) {
-      this.setState({ query: latestQuery });
+      this.setState({ query: latestQuery, latestQuery: latestQuery });
+    }
+
+    if (latestResult !== undefined) {
+      this.setState({ results: JSON.parse(latestResult) })
     }
 
     this.vibecheck();
@@ -42,7 +47,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
     if (query !== latestQuery) {
       //? API calls go here 
       const songResults = await getSongQuery(query);
-      await saveData('LATEST_RESUlT', JSON.stringify(songResults));
+      await saveData('LATEST_RESULT', JSON.stringify(songResults));
       await saveData('LATEST_QUERY', query);
 
       this.setState({
@@ -86,9 +91,9 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
   }
 
   render() {
-    
     const { results, query, signal, activeSong } = this.state;
     const { navigation } = this.props;
+
     return (
       <View style={{ flex: 1, flexDirection: 'column' }}>
         <Menu navigation={navigation} />
@@ -118,7 +123,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
                     artist={song.artist_name} 
                     album={song.genre}
                     setActive={signal}
-                    songId={song["track_id.1"]} //parameter was "track_id.1 not track_id"
+                    songId={song["track_id.1"]}
                     amIActive={activeSong}
                     listIdentifier={index}
                   />)
