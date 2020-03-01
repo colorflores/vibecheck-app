@@ -1,11 +1,11 @@
 import React from 'react';
-import { Text, View, TextInput, TouchableOpacity, Image, Keyboard, RefreshControlComponent } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Image, Keyboard } from 'react-native';
 import { LandingInterfaceProps, LandingInterfaceState } from '../../interfaces/Landing.interface';
 import landingStyles from './Landing.styles';
 import generalStyles from '../../styles/generalStyles';
 import playButton from '../../assets/img/play.png';
 import Menu from '../Menu/Menu';
-import { saveData, getData, deleteData as yeet } from '../../util/Storage.util';
+import { saveData, deleteData as yeet } from '../../util/Storage.util';
 
 const sampleQueries = [
   "💯🔥🔥",
@@ -80,7 +80,7 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
 
     if (query !== '') {
       await saveData('LATEST_QUERY', query);
-      navigate('Vibecheck')
+      navigate('Vibecheck');
     }
   }
 

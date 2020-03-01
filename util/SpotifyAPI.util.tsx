@@ -33,7 +33,7 @@ export const playTrack = async (songId: string) => {
   await verifyToken();
 
   const currDevices = await s.getMyDevices();
-  const mobile = currDevices.devices.reduce((mobile, curr) => curr.type === "Smartphone" ? mobile = curr : null);
+  const mobile = await currDevices.devices.reduce((mobile, curr) => curr.type === "Smartphone" ? mobile = curr : null);
 
   await fetch(`https://api.spotify.com/v1/me/player`, {
     method: 'PUT',
@@ -88,22 +88,49 @@ export const savePlaylist = async (nameOfPlaylist: string, songs) => {
     })
   }).then(async (res) => {
     return await res.json();
-  })
+  });
 
   latestPlaylist = newPlaylist.name;
   latestPlaylistURL = newPlaylist.external_urls.spotify;
+  
+  fetch(`https://api.spotify.com/v1/playlists/${newPlaylist.id}/tracks`,{
+    method: 'POST', 
+    headers: {
+      'Authorization': `Bearer ${s.getAccessToken()}`,   
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      uris: Object.keys(songs).map((songObj) => {
+        return `spotify:track:${songs[songObj]['track_id.1']}`;
+      })
+    })
+  }).then(async (res) => {
+    return await res.json();
+  });
 
-  // ?Do this when URIs are added to each song
-  // await s.addTracksToPlaylist(newPlaylist.id, [
-    
-  // ])
+  await fetch('https://vibecheck.ca/coverImage.txt', {
+    method: 'GET',
+    headers : {
+      'Content-Type': 'text/plain'
+    }
+  }).then(async (res) => {
+    const encodedImage = await res.text();
+
+    await fetch(`https://api.spotify.com/v1/playlists/${newPlaylist.id}/images`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${s.getAccessToken()}`,   
+        'Content-Type': 'image/jpeg'
+      },
+      body: encodedImage
+    });
+  })
 }
 
 export const getProfileData = () =>{
   return user
 }
 
- 
 export const getTopArtists = async () => { 
   await verifyToken();
 
@@ -115,6 +142,34 @@ export const getTopArtists = async () => {
   }).then(async (res) => {
     return await res.json()
   })
-  // console.log(topArtist.items[0].name)
   return topArtist.items[0].name
 };
+
+export const getSongQuery = async (queryString) => { 
+  await verifyToken();
+
+  let songResults= await fetch(`http://vibecheckrandomrest.westus.azurecontainer.io:5000/search/${encodeURI(queryString)}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${s.getAccessToken()}`,
+    },
+  }).then(async (res) => {
+    return await res.json()
+  })
+  return songResults
+};
+
+export const getAlbumArt = async (artist: string, album: string) => {
+  await verifyToken();
+
+  return await fetch(`https://itunes.apple.com/search?term=${artist.replace(' ', '+')}+${album.replace(' ', '+')}&limit=1&entity=song`, {
+    method: 'GET',
+  }).then(async res => {
+    const result = await res.json();
+    if (result.results) {
+      return result.results[0].artworkUrl100.replace('100x100bb', '400x400bb');
+    } else {
+      return null;
+    }
+  });
+}

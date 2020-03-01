@@ -10,7 +10,7 @@ import { getData, saveData } from '../../util/Storage.util';
 import mockResult from '../../mock/mockplaylist.json';
 import saveSpotifyIcon from '../../assets/img/spotify_save.png';
 import shareIcon from '../../assets/img/share_icon.png';
-import { savePlaylist, sharePlaylist } from '../../util/SpotifyAPI.util';
+import { savePlaylist, sharePlaylist, getSongQuery } from '../../util/SpotifyAPI.util';
 
 export default class Vibecheck extends React.Component<VibecheckInterfaceProps, VibecheckInterfaceState> {
   constructor(props) {
@@ -28,27 +28,18 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
 
   async componentDidMount() {
     const latestQuery = await getData('LATEST_QUERY');
-    let latestResults = null;
+    const latestResult = await getData('LATEST_RESULT');
 
     if (latestQuery !== undefined) {
-      this.setState({
-        query: latestQuery,
-        latestQuery,
-      });
+      this.setState({ query: latestQuery, latestQuery: latestQuery });
+    }
 
-      latestResults = await getData('LATEST_RESULT');
-
-      if (latestResults !== undefined) {
-        this.setState({
-          results: JSON.parse(latestResults).songs,
-        });
-      } else {
-        //? If latest data doesn't exist call api and save those results
-        await saveData('LATEST_RESULT', JSON.stringify(mockResult))
-        this.setState({
-          results: mockResult.songs
-        })
-      }
+    if (latestResult !== undefined) {
+      this.setState({ results: JSON.parse(latestResult) })
+    } else {
+      const newResults = await getSongQuery(latestQuery);
+      this.setState({ results: newResults});
+      await saveData('LATEST_RESULT', JSON.stringify(newResults));
     }
   }
 
@@ -57,13 +48,14 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
 
     if (query !== latestQuery) {
       //? API calls go here 
-      // await saveData("LATEST_RESUT", someapiresult);
-
+      const songResults = await getSongQuery(query);
+      await saveData('LATEST_RESULT', JSON.stringify(songResults));
       await saveData('LATEST_QUERY', query);
 
       this.setState({
+        query: query,
         latestQuery: query,
-        results: mockResult.songs
+        results: songResults
       });
     }
   }
@@ -149,7 +141,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
                     artist={song.artist_name} 
                     album={song.genre}
                     setActive={signal}
-                    songId={song.track_id}
+                    songId={song["track_id.1"]}
                     amIActive={activeSong}
                     listIdentifier={index}
                   />)

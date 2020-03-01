@@ -40,7 +40,8 @@ const songCardStyles = StyleSheet.create({
     elevation: 8,
   },
   albumImage: {
-    height: '100%',
+    height: 110,
+    width: 110,
     resizeMode: 'contain'
   },
   songContainerOutter: {
@@ -63,7 +64,7 @@ const songCardStyles = StyleSheet.create({
   },
   albumShading: { 
     position: 'absolute', 
-    backgroundColor: 'rgba(0, 0, 0, 0.1)', 
+    backgroundColor: 'rgba(0, 0, 0, 0.2)', 
     height: '100%', 
     width: '100%',
     flexDirection: 'column',

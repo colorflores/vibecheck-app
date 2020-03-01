@@ -12,7 +12,6 @@ export const saveData = async (key: string, value: string) => {
 export const getData = async (key: string) => {
   try {
     const data = await AsyncStorage.getItem(key);
-    console.log(data);
     if (data) {
       return data;
     }
