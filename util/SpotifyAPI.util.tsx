@@ -1,6 +1,7 @@
 import { getData } from './Storage.util';
 import { refreshAuthTokens } from './Spotify.util';
 import Spotify from 'spotify-web-api-js';
+import * as FileSystem from 'expo-file-system';
 
 const s = new Spotify();
 let user = null;
@@ -88,15 +89,36 @@ export const savePlaylist = async (nameOfPlaylist: string, songs) => {
     })
   }).then(async (res) => {
     return await res.json();
-  })
+  });
 
   latestPlaylist = newPlaylist.name;
   latestPlaylistURL = newPlaylist.external_urls.spotify;
 
-  // ?Do this when URIs are added to each song
-  // await s.addTracksToPlaylist(newPlaylist.id, [
-    
-  // ])
+  // await fetch(`https://api.spotify.com/v1/playlists/${newPlaylist.id}/images`,{
+  //   method: 'PUT', 
+  //   headers: {
+  //     'Authorization': `Bearer ${s.getAccessToken()}`,   
+  //     'Content-Type': 'image/jpeg'
+  //   },
+  //   body: await FileSystem.readAsStringAsync(`file://${FileSystem.documentDirectory}/assets/img/playlist_cover.jpg`, { encoding: FileSystem.EncodingType.Base64 })
+  // }).then(async (res) => {
+  //   return await res.json();
+  // });
+
+  await fetch(`https://api.spotify.com/v1/playlists/${newPlaylist.id}/tracks`,{
+    method: 'POST', 
+    headers: {
+      'Authorization': `Bearer ${s.getAccessToken()}`,   
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      uris: Object.keys(songs).map((songObj) => {
+        return `spotify:track:${songs[songObj]['track_id.1']}`;
+      })
+    })
+  }).then(async (res) => {
+    return await res.json();
+  });
 }
 
 export const getProfileData = () =>{

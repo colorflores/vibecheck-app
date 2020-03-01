@@ -18,6 +18,7 @@ const spotifyScopes = [
   'playlist-modify-private', 
   'user-read-recently-played', 
   'user-top-read',
+  'ugc-image-upload',
 ].join(' ');
 
 const getExpiryTime = (time : number) => new Date().getTime() + time * 1000;
