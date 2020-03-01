@@ -36,9 +36,11 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
 
     if (latestResult !== undefined) {
       this.setState({ results: JSON.parse(latestResult) })
+    } else {
+      const newResults = await getSongQuery(latestQuery);
+      this.setState({ results: newResults});
+      await saveData('LATEST_RESULT', JSON.stringify(newResults));
     }
-
-    this.vibecheck();
   }
 
   vibecheck = async () => {

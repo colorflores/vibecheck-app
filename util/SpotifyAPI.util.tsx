@@ -1,7 +1,7 @@
 import { getData } from './Storage.util';
 import { refreshAuthTokens } from './Spotify.util';
 import Spotify from 'spotify-web-api-js';
-import * as FileSystem from 'expo-file-system';
+import { base64Img } from './CoverImage';
 
 const s = new Spotify();
 let user = null;
@@ -93,18 +93,7 @@ export const savePlaylist = async (nameOfPlaylist: string, songs) => {
 
   latestPlaylist = newPlaylist.name;
   latestPlaylistURL = newPlaylist.external_urls.spotify;
-
-  // await fetch(`https://api.spotify.com/v1/playlists/${newPlaylist.id}/images`,{
-  //   method: 'PUT', 
-  //   headers: {
-  //     'Authorization': `Bearer ${s.getAccessToken()}`,   
-  //     'Content-Type': 'image/jpeg'
-  //   },
-  //   body: await FileSystem.readAsStringAsync(`file://${FileSystem.documentDirectory}/assets/img/playlist_cover.jpg`, { encoding: FileSystem.EncodingType.Base64 })
-  // }).then(async (res) => {
-  //   return await res.json();
-  // });
-
+  
   await fetch(`https://api.spotify.com/v1/playlists/${newPlaylist.id}/tracks`,{
     method: 'POST', 
     headers: {
@@ -118,6 +107,15 @@ export const savePlaylist = async (nameOfPlaylist: string, songs) => {
     })
   }).then(async (res) => {
     return await res.json();
+  });
+
+  await fetch(`https://api.spotify.com/v1/playlists/${newPlaylist.id}/images`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${s.getAccessToken()}`,   
+      'Content-Type': 'image/jpeg'
+    },
+    body: base64Img
   });
 }
 
