@@ -132,7 +132,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
                 shuffle playlist
               </Text>
             </TouchableOpacity>
-            <View style={{ marginTop: 30, flex: 1, flexDirection: 'column' }}>
+            <View style={{ marginBottom: 30, flex: 1, flexDirection: 'column' }}>
               {(results) ? (
                 results.map((song, index: number) => (
                   (<SongCard

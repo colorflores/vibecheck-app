@@ -90,6 +90,10 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
     }
   }
 
+  replaceQuery = () => {
+    this.setState({ query: sampleQueries[Math.floor(Math.random() * sampleQueries.length)] });
+  }
+
   render() {
     const { placeHolder, query } = this.state;
     const { navigation } = this.props;
@@ -106,7 +110,7 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
               if (input[input.length - 1] !== '\n') {
                 this.updateQuery(input)
               }
-            }} 
+            }}
             value={query} placeholderTextColor="rgba(0,0,0,0.3)" 
             placeholder={placeHolder}
             multiline={true}
@@ -115,7 +119,7 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
           <TouchableOpacity onPress={this.checkVibe} style={[landingStyles.playBox, landingStyles.elementMargin]}>
             <Image style={landingStyles.playButton} source={playButton} />
           </TouchableOpacity>
-          <TouchableOpacity style={landingStyles.playlistButton}>
+          <TouchableOpacity onPress={this.replaceQuery} style={landingStyles.playlistButton}>
             <Text style={generalStyles.titleButton}>don't have one?</Text>
           </TouchableOpacity>
         </View>
