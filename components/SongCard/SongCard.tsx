@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import test from '../../assets/img/test.jpg';
 import songCardStyles from './SongCard.style';
 import playButton from '../../assets/img/play_button.png';
 import pauseButton from '../../assets/img/pause_button.png';
