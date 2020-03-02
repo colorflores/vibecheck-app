@@ -96,7 +96,10 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
   }
 
   replaceQuery = () => {
-    this.setState({ query: sampleQueries[Math.floor(Math.random() * sampleQueries.length)] });
+    this.setState({ 
+      query: sampleQueries[Math.floor(Math.random() * sampleQueries.length)], 
+      isActive: true 
+    });
   }
 
   render() {
