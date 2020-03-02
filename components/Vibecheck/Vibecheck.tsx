@@ -132,7 +132,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
                     artist={song.artist_name} 
                     album={song.genre}
                     setActive={signal}
-                    songId={song.spotify_url.slice(song.spotify_url.length - 22, song.spotify_url.length)}
+                    songId={song.spotify_url.split('/').pop()}
                     amIActive={activeSong}
                     listIdentifier={index}
                   />)

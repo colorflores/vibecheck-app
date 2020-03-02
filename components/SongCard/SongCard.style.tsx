@@ -40,8 +40,8 @@ const songCardStyles = StyleSheet.create({
     elevation: 8,
   },
   albumImage: {
-    height: 110,
-    width: 110,
+    height: '100%',
+    width: '100%',
     resizeMode: 'contain'
   },
   songContainerOutter: {
