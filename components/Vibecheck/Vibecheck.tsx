@@ -10,7 +10,8 @@ import { getData, saveData } from '../../util/Storage.util';
 import mockResult from '../../mock/mockplaylist.json';
 import saveSpotifyIcon from '../../assets/img/spotify_save.png';
 import shareIcon from '../../assets/img/share_icon.png';
-import { savePlaylist, sharePlaylist, getSongQuery } from '../../util/SpotifyAPI.util';
+import { savePlaylist, sharePlaylist } from '../../util/SpotifyAPI.util';
+import { getSongQuery } from '../../util/VibecheckAPI.util';
 
 export default class Vibecheck extends React.Component<VibecheckInterfaceProps, VibecheckInterfaceState> {
   constructor(props) {
@@ -125,7 +126,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
                     artist={song.artist_name} 
                     album={song.genre}
                     setActive={signal}
-                    songId={song["track_id.1"]}
+                    songId={song.spotify_url.slice(song.spotify_url.length - 22, song.spotify_url.length)}
                     amIActive={activeSong}
                     listIdentifier={index}
                   />)

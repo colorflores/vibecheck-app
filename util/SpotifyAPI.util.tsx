@@ -145,20 +145,6 @@ export const getTopArtists = async () => {
   return topArtist.items[0].name
 };
 
-export const getSongQuery = async (queryString) => { 
-  await verifyToken();
-
-  let songResults= await fetch(`http://vibecheckrandomrest.westus.azurecontainer.io:5000/search/${encodeURI(queryString)}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${s.getAccessToken()}`,
-    },
-  }).then(async (res) => {
-    return await res.json()
-  })
-  return songResults
-};
-
 export const getAlbumArt = async (artist: string, album: string) => {
   await verifyToken();
 
