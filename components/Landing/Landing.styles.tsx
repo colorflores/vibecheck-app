@@ -13,14 +13,24 @@ const landingStyles = StyleSheet.create({
     // borderColor: 'blue',
     // borderWidth: 2
   },
-  playlistButton: {
+  playlistButtonInactive: {
     borderColor: colors.white,
     borderWidth: constants.borderWidth,
     borderRadius: constants.borderRadius,
     paddingTop: 10,
     paddingBottom: 10,
-    paddingRight: 20,
-    paddingLeft: 20,
+    paddingRight: 15,
+    paddingLeft: 15,
+  },
+  playlistButtonActive: {
+    borderColor: colors.white,
+    backgroundColor: colors.white,
+    borderWidth: constants.borderWidth,
+    borderRadius: constants.borderRadius,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 15,
+    paddingLeft: 15,
   },
   queryBox: {
     borderBottomColor: colors.white,

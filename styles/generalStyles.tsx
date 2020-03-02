@@ -12,7 +12,7 @@ const generalStyles = StyleSheet.create({
     fontFamily: 'sail',
     fontStyle: 'normal',
     fontSize: 24,
-    color: colors.white,
+    color: colors.black,
   },
   text: {
     fontFamily: 'worksans-regular',

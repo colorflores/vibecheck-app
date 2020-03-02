@@ -41,7 +41,7 @@ const vibeCheckStyles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     padding: 6,
-    elevation: 8,
+    // elevation: 8,
     borderRadius: constants.borderRadius
   },
   searchIconContainer: {

@@ -8,13 +8,18 @@ import Menu from '../Menu/Menu';
 import { saveData, deleteData as yeet } from '../../util/Storage.util';
 
 const sampleQueries = [
-  "💯🔥🔥",
-  "I'm falling in love",
-  "Just got to a party",
-  "❤️🥰🌹",
-  "🎉🎉🥳😎",
-  "Trying to study",
-  "nature ❄️🌲"
+  '💯🔥🔥',
+  '😴☔️',
+  `I'm falling in love`,
+  'Just got to a party',
+  '❤️🥰🌹',
+  '🚙☀️',
+  `Woke up late, now I feel like it's noon and it's 6pm`,
+  '🎉🎉🥳😎',
+  'Trying to study',
+  'nature ❄️🌲',
+  '🌌🌙',
+  `I woke up then came to work, my day started like 3 hours ago, it's chill`,
 ]
 
 export default class Landing extends React.Component<LandingInterfaceProps, LandingInterfaceState> {
@@ -24,7 +29,7 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
       placeHolder: sampleQueries[0],
       query: '',
       isActive: false,
-      menuStatus: 'flex',
+      samples: false,
     };
   }
 
@@ -95,7 +100,7 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
   }
 
   render() {
-    const { placeHolder, query } = this.state;
+    const { placeHolder, query, samples } = this.state;
     const { navigation } = this.props;
 
     return (
@@ -119,7 +124,12 @@ export default class Landing extends React.Component<LandingInterfaceProps, Land
           <TouchableOpacity onPress={this.checkVibe} style={[landingStyles.playBox, landingStyles.elementMargin]}>
             <Image style={landingStyles.playButton} source={playButton} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.replaceQuery} style={landingStyles.playlistButton}>
+          <TouchableOpacity 
+            onPressIn={() => this.setState({ samples: true })} 
+            onPressOut={() => this.setState({ samples: false })}
+            onPress={this.replaceQuery} 
+            activeOpacity={1}
+            style={samples ? landingStyles.playlistButtonActive : landingStyles.playlistButtonInactive}>
             <Text style={generalStyles.titleButton}>don't have one?</Text>
           </TouchableOpacity>
         </View>
