@@ -31,7 +31,24 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
     const latestQuery = await getData('LATEST_QUERY');
     // const latestResult = await getData('LATEST_RESULT');
 
-    this.setState({ query: latestQuery, results: await getSongQuery(latestQuery) });
+    this.setState({ query: latestQuery });
+
+    const resultQuery = await getSongQuery(latestQuery);
+    
+    if (resultQuery) {
+      this.setState({ results: await getSongQuery(latestQuery) });
+    } else {
+      Alert.alert(
+        'Vibecheck',
+        `Sorry, that vibe doesn't seem to work, please try again`,
+        [{
+          text: 'Done',
+          style: 'default'
+        }], { 
+          cancelable: true
+        }
+      );
+    }
   }
 
   vibecheck = async () => {
@@ -39,14 +56,30 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
 
     if (query !== latestQuery) {
       //? API calls go here 
-      const songResults = await getSongQuery(query);
-      await saveData('LATEST_RESULT', JSON.stringify(songResults));
+
+      const songResults = await getSongQuery(latestQuery);
+    
+      if (songResults) {
+        await saveData('LATEST_RESULT', JSON.stringify(songResults));
+        this.setState({ results: await getSongQuery(latestQuery) });
+      } else {
+        Alert.alert(
+          'Vibecheck',
+          `Sorry, that vibe doesn't seem to work, please try again`,
+          [{
+            text: 'Done',
+            style: 'default'
+          }], { 
+            cancelable: true
+          }
+        );
+      }
+
       await saveData('LATEST_QUERY', query);
 
       this.setState({
         query: query,
         latestQuery: query,
-        results: songResults
       });
     }
   }

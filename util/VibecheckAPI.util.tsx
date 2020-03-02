@@ -5,11 +5,15 @@ export const getSongQuery = async (queryString) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      "query": queryString
+      "query": `${queryString}`
     })
   }).then(async (res) => {
-    return await res.json()
+    return await res.json();
+  }).catch(err => {
+    console.log(err);
+    return null;
   })
+
   return songResults
 };
 

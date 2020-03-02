@@ -33,7 +33,7 @@ export const playTrack = async (songId: string) => {
   await verifyToken();
 
   const currDevices = await s.getMyDevices();
-  const mobile = await currDevices.devices.reduce((mobile, curr) => curr.type === "Smartphone" ? mobile = curr : null);
+  const mobile = currDevices.devices.reduce((mobile, curr) => curr.type === "Smartphone" ? mobile = curr : null);
 
   await fetch(`https://api.spotify.com/v1/me/player`, {
     method: 'PUT',
@@ -59,7 +59,8 @@ export const playTrack = async (songId: string) => {
   });
 }
 
-export const pauseTrack = () => {
+export const pauseTrack = async () => {
+  await verifyToken();
   s.pause();
 }
 
@@ -101,7 +102,7 @@ export const savePlaylist = async (nameOfPlaylist: string, songs) => {
     },
     body: JSON.stringify({
       uris: Object.keys(songs).map((songObj) => {
-        return `spotify:track:${songs[songObj]['track_id.1']}`;
+        return `spotify:track:${songs[songObj].spotify_url.split('/').pop()}`;
       })
     })
   }).then(async (res) => {
@@ -128,7 +129,7 @@ export const savePlaylist = async (nameOfPlaylist: string, songs) => {
 }
 
 export const getProfileData = () =>{
-  return user
+  return user;
 }
 
 export const getTopArtists = async () => { 
