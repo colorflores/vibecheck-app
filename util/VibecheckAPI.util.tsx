@@ -5,7 +5,8 @@ export const getSongQuery = async (queryString) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      "query": `${queryString}`
+      "query": `${queryString}`,
+      "n": 8, 
     })
   }).then(async (res) => {
     return await res.json();

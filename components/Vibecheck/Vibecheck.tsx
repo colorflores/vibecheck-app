@@ -55,13 +55,13 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
     const { query, latestQuery } = this.state;
 
     if (query !== latestQuery) {
-      //? API calls go here 
-
-      const songResults = await getSongQuery(latestQuery);
-    
+      const songResults = await getSongQuery(query);
+  
       if (songResults) {
         await saveData('LATEST_RESULT', JSON.stringify(songResults));
-        this.setState({ results: await getSongQuery(latestQuery) });
+        await saveData('LATEST_QUERY', query);
+        this.setState({ latestQuery: query })
+        this.setState({ results: await getSongQuery(query) });
       } else {
         Alert.alert(
           'Vibecheck',
@@ -74,14 +74,8 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
           }
         );
       }
-
-      await saveData('LATEST_QUERY', query);
-
-      this.setState({
-        query: query,
-        latestQuery: query,
-      });
     }
+
   }
 
   savePlaylist = async () => {
@@ -169,6 +163,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
                     amIActive={activeSong}
                     listIdentifier={index}
                     geniusID={song.api_path}
+                    newAlbum={null}
                   />)
                 ))
               ) : null}

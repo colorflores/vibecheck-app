@@ -7,21 +7,19 @@ import noArt from '../../assets/img/noArt.png';
 import { playTrack, pauseTrack } from '../../util/SpotifyAPI.util';
 import { getAlbumArt } from '../../util/Genius.util';
 
-const SongCard = ({ title, artist, genre, setActive, songId, amIActive, listIdentifier, geniusID }) => {
+const SongCard = ({ title, artist, genre, setActive, songId, amIActive, listIdentifier, geniusID, newAlbum }) => {
   const [songIsActive, setSongStatus] = useState(false);
-  const [songAlbum, setSongAlbum] = useState({albumUrl: null});
+  const [songAlbum, setSongAlbum] = useState({albumUrl: newAlbum});
 
   useEffect(() => {
     if (listIdentifier !== amIActive && songIsActive) {
       setSongStatus(false);
     }
-  });
+  }, []);
 
   useEffect(() => {
-    if (!songAlbum.albumUrl) {
-      fetchSong();
-    }
-  });
+    fetchSong();
+  }, [songAlbum.albumUrl === null]);
 
   const fetchSong = async () => {
     const albumArt = await getAlbumArt(geniusID);
