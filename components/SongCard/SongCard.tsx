@@ -6,7 +6,7 @@ import pauseButton from '../../assets/img/pause_button.png';
 import noArt from '../../assets/img/noArt.png';
 import { playTrack, pauseTrack, getAlbumArt } from '../../util/SpotifyAPI.util';
 
-const SongCard = ({ title, artist, album, setActive, songId, amIActive, listIdentifier }) => {
+const SongCard = ({ title, artist, genre, setActive, songId, amIActive, listIdentifier, geniusID }) => {
   const [songIsActive, setSongStatus] = useState(false);
   const [songAlbum, setSongAlbum] = useState({albumUrl: null});
   // const didMountRef = useRef(false)
@@ -32,7 +32,7 @@ const SongCard = ({ title, artist, album, setActive, songId, amIActive, listIden
   });
 
   const fetchSong = async () => {
-    const albumArt = await getAlbumArt(artist, album);
+    const albumArt = await getAlbumArt(geniusID);
     setSongAlbum({ albumUrl: albumArt });
   }
 
@@ -65,7 +65,7 @@ const SongCard = ({ title, artist, album, setActive, songId, amIActive, listIden
             {artist}
           </Text>
           <Text style={songCardStyles.songAlbum}>
-            {album}
+            {genre}
           </Text>
         </View>
       </View>
