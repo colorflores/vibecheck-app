@@ -4,26 +4,18 @@ import songCardStyles from './SongCard.style';
 import playButton from '../../assets/img/play_button.png';
 import pauseButton from '../../assets/img/pause_button.png';
 import noArt from '../../assets/img/noArt.png';
-import { playTrack, pauseTrack, getAlbumArt } from '../../util/SpotifyAPI.util';
+import { playTrack, pauseTrack } from '../../util/SpotifyAPI.util';
+import { getAlbumArt } from '../../util/Genius.util';
 
 const SongCard = ({ title, artist, genre, setActive, songId, amIActive, listIdentifier, geniusID }) => {
   const [songIsActive, setSongStatus] = useState(false);
   const [songAlbum, setSongAlbum] = useState({albumUrl: null});
-  // const didMountRef = useRef(false)
 
   useEffect(() => {
     if (listIdentifier !== amIActive && songIsActive) {
       setSongStatus(false);
     }
   });
-
-  // useEffect(() => {
-  //   if (didMountRef.current) {
-  //     fetchSong();
-  //   } else {
-  //     didMountRef.current = true;
-  //   }
-  // })
 
   useEffect(() => {
     if (!songAlbum.albumUrl) {
