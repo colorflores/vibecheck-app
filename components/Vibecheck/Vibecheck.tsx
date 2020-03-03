@@ -163,7 +163,6 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
                     amIActive={activeSong}
                     listIdentifier={index}
                     geniusID={song.api_path}
-                    newAlbum={null}
                   />)
                 ))
               ) : null}

@@ -8,18 +8,10 @@ import Menu from '../Menu/Menu';
 import { saveData, deleteData as yeet } from '../../util/Storage.util';
 
 const sampleQueries = [
-  '💯🔥🔥',
-  '😴☔️',
-  `I'm falling in love`,
-  'Just got to a party',
-  '❤️🥰🌹',
-  '🚙☀️',
-  `Woke up late, now I feel like it's noon and it's 6pm`,
-  '🎉🎉🥳😎',
-  'Trying to study',
-  'nature ❄️🌲',
-  '🌌🌙',
-  `I woke up then came to work, my day started like 3 hours ago, it's chill`,
+  'Sad Boi Hours',
+  'I love her',
+  'Nature ❄️🌲',
+  'Way Up I Feel Blessed'
 ]
 
 export default class Landing extends React.Component<LandingInterfaceProps, LandingInterfaceState> {
