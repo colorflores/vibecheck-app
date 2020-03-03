@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image,TouchableOpacity, Animated } from 'react-native';
+import { Text, View, Image,TouchableOpacity, Animated, Alert } from 'react-native';
 import menuStyles from './Menu.styles';
 import menuLogo from '../../assets/img/app_dark_logo.png';
 import menuLogoLight from '../../assets/img/app_light_logo.png';
@@ -22,33 +22,37 @@ const emptyState = {
   animation: new Animated.Value(0)
 }
 
-const menuItem = (navFunction, target, dotSrc, text) => {
-  if (target === "LogOut") {
-    return (
-      <View style={menuStyles.elementMargin} key={`${text}-id`}>
-        <TouchableOpacity onPress={async () => {
+const menuItem = (navFunction, target, dotSrc, text) => (
+  <View style={menuStyles.elementMargin} key={`${text}-id`}>
+    <TouchableOpacity 
+      onPress={async () => {
+        if (target === 'LogOut') {
           await yeet('ACCESS_TOKEN');
           await yeet('REFRESH_TOKEN');
           await yeet('EXPIRY_TIME');
           
           navFunction('Login');
-        }} style={menuStyles.option}>
-          <Image style={menuStyles.dotStyle} source={dotSrc} />
-          <Text style={menuStyles.text}>{text}</Text>
-        </TouchableOpacity>
-      </View>
-    )
-  } else {
-    return (
-      <View style={menuStyles.elementMargin} key={`${text}-id`}>
-        <TouchableOpacity onPress={() => navFunction(target)} style={menuStyles.option}>
-          <Image style={menuStyles.dotStyle} source={dotSrc} />
-          <Text style={menuStyles.text}>{text}</Text>
-        </TouchableOpacity>
-      </View>
-    )
-  }
-}
+        } else if (['PlaylistCheck', 'Playlists', 'About'].indexOf(target) >= 0) {
+          Alert.alert(
+            'Vibecheck',
+            'Coming soon!',
+            [{
+              text: 'Done',
+              style: 'default'
+            }], { 
+              cancelable: true
+            }
+          )
+        } else {
+          navFunction(target)
+        }
+      }} 
+      style={menuStyles.option}>
+      <Image style={menuStyles.dotStyle} source={dotSrc} />
+      <Text style={menuStyles.text}>{text}</Text>
+    </TouchableOpacity>
+  </View>
+)
 
 const menuItems = {
   'Vibecheck': [yellowDot, 'Vibecheck'],

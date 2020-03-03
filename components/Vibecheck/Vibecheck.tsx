@@ -21,6 +21,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
       results: null,
       latestQuery: null,
       activeSong: null,
+      shuffleSong: null,
       signal: (origin: number) => {
         this.setState({ activeSong: origin })
       }
@@ -121,12 +122,12 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
     const { results } = this.state;
 
     if (results) {
-      this.setState({ activeSong: Math.floor(Math.random() * Object.keys(results).length) })
+      this.setState({ shuffleSong: Math.floor(Math.random() * Object.keys(results).length) })
     }
   }
 
   render() {
-    const { results, query, signal, activeSong } = this.state;
+    const { results, query, signal, activeSong, shuffleSong } = this.state;
     const { navigation } = this.props;
 
     return (
@@ -171,6 +172,7 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
                     amIActive={activeSong}
                     listIdentifier={index}
                     geniusID={song.api_path}
+                    shuffleActiveSong={shuffleSong}
                   />)
                 ))
               ) : null}

@@ -7,7 +7,7 @@ import noArt from '../../assets/img/noArt.png';
 import { playTrack, pauseTrack } from '../../util/SpotifyAPI.util';
 import { getAlbumArt } from '../../util/Genius.util';
 
-const SongCard = ({ title, artist, genre, setActive, songId, amIActive, listIdentifier, geniusID }) => {
+const SongCard = ({ title, artist, genre, setActive, songId, amIActive, listIdentifier, geniusID, shuffleActiveSong }) => {
   const [songIsActive, setSongStatus] = useState(false);
   const [songAlbum, setSongAlbum] = useState({albumUrl: null});
 
@@ -15,35 +15,17 @@ const SongCard = ({ title, artist, genre, setActive, songId, amIActive, listIden
     if (listIdentifier !== amIActive && songIsActive) {
       setSongStatus(false);
     }
-
-    if (amIActive === listIdentifier && !songIsActive) {
-      shuffle();
-    }
   }, [listIdentifier, amIActive, songIsActive]);
+
+  useEffect(() => {
+    if (shuffleActiveSong === listIdentifier && !songIsActive) {
+      updateStatus();
+    }
+  }, [shuffleActiveSong])
 
   useEffect(() => {
     fetchSongArt();
   }, [title]);
-
-  const shuffle = async () => {
-    const songPlayed = await playTrack(songId);
-  
-    if (songPlayed) {
-      setActive(listIdentifier);
-      setSongStatus(!songIsActive);
-    } else {
-      Alert.alert(
-        'Vibecheck',
-        `The Spotify app must be open in the background in order to play music through the app!`,
-        [{
-          text: 'Done',
-          style: 'default'
-        }], { 
-          cancelable: true
-        }
-      );
-    }
-  }
 
   const fetchSongArt = async () => {
     const albumArt = await getAlbumArt(geniusID);

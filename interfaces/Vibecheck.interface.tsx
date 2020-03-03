@@ -8,4 +8,5 @@ export interface VibecheckInterfaceState {
   results,
   signal: Function,
   activeSong: number | null,
+  shuffleSong: number | null,
 }

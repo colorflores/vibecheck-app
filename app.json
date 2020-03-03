@@ -34,10 +34,11 @@
     "android": {
       "package": "com.vibecheck.vibecheck",
       "versionCode": 2,
-      "icon": "./assets/img/app_icon.png",
       "adaptiveIcon": {
-        "backgroundColor": "#FFC300"
-      }
+        "backgroundColor": "#FFC300",
+        "foregroundImage": "./assets/img/app_icon.png"
+      },
+      "icon": "./assets/img/app_full_icon.png"
     },
     "scheme": "exp"
   }
