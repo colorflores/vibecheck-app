@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, TouchableOpacity, Image, Linking } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Linking, Alert } from 'react-native';
 import songCardStyles from './SongCard.style';
 import playButton from '../../assets/img/play_button.png';
 import pauseButton from '../../assets/img/pause_button.png';
@@ -15,13 +15,37 @@ const SongCard = ({ title, artist, genre, setActive, songId, amIActive, listIden
     if (listIdentifier !== amIActive && songIsActive) {
       setSongStatus(false);
     }
+
+    if (amIActive === listIdentifier && !songIsActive) {
+      shuffle();
+    }
   }, [listIdentifier, amIActive, songIsActive]);
 
   useEffect(() => {
-    fetchSong();
+    fetchSongArt();
   }, [title]);
 
-  const fetchSong = async () => {
+  const shuffle = async () => {
+    const songPlayed = await playTrack(songId);
+  
+    if (songPlayed) {
+      setActive(listIdentifier);
+      setSongStatus(!songIsActive);
+    } else {
+      Alert.alert(
+        'Vibecheck',
+        `The Spotify app must be open in the background in order to play music through the app!`,
+        [{
+          text: 'Done',
+          style: 'default'
+        }], { 
+          cancelable: true
+        }
+      );
+    }
+  }
+
+  const fetchSongArt = async () => {
     const albumArt = await getAlbumArt(geniusID);
     setSongAlbum({ albumUrl: albumArt });
   }
@@ -30,8 +54,23 @@ const SongCard = ({ title, artist, genre, setActive, songId, amIActive, listIden
     setSongStatus(!songIsActive);
 
     if (!songIsActive) {
-      playTrack(songId);
-      setActive(listIdentifier);
+      const songPlayed = await playTrack(songId);
+
+      if (songPlayed) {
+        setActive(listIdentifier);
+        setSongStatus(!songIsActive);
+      } else {
+        Alert.alert(
+          'Vibecheck',
+          `The Spotify app must be open in the background in order to play music through the app!`,
+          [{
+            text: 'Done',
+            style: 'default'
+          }], { 
+            cancelable: true
+          }
+        );
+      }
     } else {
       pauseTrack();
     }

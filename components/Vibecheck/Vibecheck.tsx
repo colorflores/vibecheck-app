@@ -117,6 +117,14 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
     }
   }
 
+  shuffleSong = () => {
+    const { results } = this.state;
+
+    if (results) {
+      this.setState({ activeSong: Math.floor(Math.random() * Object.keys(results).length) })
+    }
+  }
+
   render() {
     const { results, query, signal, activeSong } = this.state;
     const { navigation } = this.props;
@@ -145,11 +153,11 @@ export default class Vibecheck extends React.Component<VibecheckInterfaceProps, 
                 </View>
               </TouchableOpacity>
             </View>
-            {/* <TouchableOpacity style={{ width: '60%', flexDirection: 'row', alignContent: 'center', alignItems: 'center', justifyContent: 'center', height: 36, backgroundColor: 'black', marginTop: 30, elevation: 8, borderRadius: 10 }}>
+            <TouchableOpacity onPress={() => this.shuffleSong()} style={{ width: '60%', flexDirection: 'row', alignContent: 'center', alignItems: 'center', justifyContent: 'center', height: 36, backgroundColor: 'black', marginTop: 30, elevation: 8, borderRadius: 10 }}>
               <Text style={{ color: 'white', fontFamily: 'worksans-light', fontStyle: 'normal', fontSize: 18 }}>
                 shuffle playlist
               </Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
             <View style={{ marginBottom: 30, flex: 1, flexDirection: 'column' }}>
               {(results) ? (
                 results.map((song, index: number) => (

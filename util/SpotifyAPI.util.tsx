@@ -33,30 +33,38 @@ export const playTrack = async (songId: string) => {
   await verifyToken();
 
   const currDevices = await s.getMyDevices();
-  const mobile = currDevices.devices.reduce((mobile, curr) => curr.type === "Smartphone" ? mobile = curr : null);
 
-  await fetch(`https://api.spotify.com/v1/me/player`, {
-    method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${s.getAccessToken()}`,
-      'Content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      'device_id': [mobile.id],
-      'play': true,
-    })
-  });
+  if (currDevices.devices.length !== 0) {
+    const mobile = currDevices.devices.reduce((mobile, curr) => curr.type === "Smartphone" ? mobile = curr : null);
+  
+    await fetch(`https://api.spotify.com/v1/me/player`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${s.getAccessToken()}`,
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        'device_id': [mobile.id],
+        'play': true,
+      })
+    });
+  
+    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${mobile.id}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${s.getAccessToken()}`,
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        'uris': [`spotify:track:${songId}`]
+      })
+    });
 
-  fetch(`https://api.spotify.com/v1/me/player/play?device_id=${mobile.id}`, {
-    method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${s.getAccessToken()}`,
-      'Content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      'uris': [`spotify:track:${songId}`]
-    })
-  });
+    return true;
+  } else {
+    return null;
+  }
+
 }
 
 export const pauseTrack = async () => {
