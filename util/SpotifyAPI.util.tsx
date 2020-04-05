@@ -8,6 +8,7 @@ let user = null;
 let latestPlaylistURL = null;
 let latestPlaylist = null;
 
+//NATHAN EMBAYE
 const verifyToken = async () => {
   const currentTokenTime = await getData('EXPIRY_TIME');
   const currentDate = new Date().getTime();
@@ -121,12 +122,14 @@ export const savePlaylist = async (nameOfPlaylist: string, songs) => {
   });
 }
 
+//NATHAN EMBAYE
 export const getProfileData = () =>{
   return user
 }
 
-export const getTopArtists = async () => { 
-  await verifyToken();
+//NATHAN EMBAYE
+export const getTopArtists = async () => {  //export means allow it to be used in another class
+  await verifyToken(); //first we wait to verify that the users session is still active checking token date
 
   let topArtist = await fetch('https://api.spotify.com/v1/me/top/artists', {
     method: 'GET',

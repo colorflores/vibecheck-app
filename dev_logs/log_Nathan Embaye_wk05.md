@@ -1,0 +1,3 @@
+|    | author_date   | repository   | notes             | duration        | stats                                             | work_items   |
+|---:|:--------------|:-------------|:------------------|:----------------|:--------------------------------------------------|:-------------|
+|  0 | 02/19/20      | vc_app       | Creating Playlist | 0 days 00:05:00 | 2 files changed, 15 insertions(+), 0 deletions(-) |              |

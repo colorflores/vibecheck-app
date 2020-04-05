@@ -79,7 +79,7 @@ export const getAuthTokens = async () => {
 
 export const refreshAuthTokens = async () => {
   try {
-    const encodedCredentials = encode(`${APP_CLIENT_ID}:${APP_CLIENT_SECRET}`);
+    const encodedCredentials = encode(`${APP_CLIENT_ID}:${APP_CLIENT_SECRET}`); //encodes key value of token, name of token
     const currRefreshToken = await getData('REFRESH_TOKEN');
     
     const reqConfig = {

@@ -71,24 +71,28 @@ export default class Profile extends React.Component <LoadingInterfaceProps, Loa
 
     await wait(2000);
 
-    const currentTokenTime = await getData('EXPIRY_TIME');
-    const currentDate = new Date().getTime();
+    const currentTokenTime = await getData('EXPIRY_TIME'); //check if data exists by checking existence of expiry time
+                                                          //null is returned here if expiry time does not exist in cache meaning no login
+    const currentDate = new Date().getTime(); //sets a data object, it is the time returned
 
-    if (currentTokenTime !== undefined) {
-      if (JSON.parse(currentTokenTime) < currentDate) {
+    if (currentTokenTime !== undefined) { //if the token is not null
+      if (JSON.parse(currentTokenTime) < currentDate) { //if token exists, check that its has not expired yet
+        //parse un-stringifies it which allows it to be compared 
         await refreshAuthTokens();
         const newToken = await getData('ACCESS_TOKEN');
         
         initializeAPI(newToken);
         navigate('Landing');
-      } else {
+      } 
+      else {
         const oldToken = await getData('ACCESS_TOKEN');
 
         initializeAPI(oldToken);
         navigate('Landing');
       }
-    } else {
-      navigate('Login');
+    } 
+    else { //if the token is null return them to login because they have to login
+      navigate('Login'); //take user back to login
     }
   }
 

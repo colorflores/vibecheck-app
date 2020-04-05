@@ -9,14 +9,14 @@ export const saveData = async (key: string, value: string) => {
   }
 }
 
-export const getData = async (key: string) => {
+export const getData = async (key: string) => { //"expiry time" here is the key
   try {
-    const data = await AsyncStorage.getItem(key);
-    if (data) {
+    const data = await AsyncStorage.getItem(key);  //async storage is imported, gets the key (expiry time) from phone cache
+    if (data) { //if something is returned (it exists) and condition is true so the expiry time is returned
       return data;
     }
-  } catch (error) {
-    console.log(error);
+  } catch (error) { //if it is not returned error exists
+    console.log(error); //print error
     return null;
   }
 }

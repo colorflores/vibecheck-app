@@ -1,0 +1,3 @@
+|    | author_date   | repository   | notes                                                                                                                       | duration        | stats                                               | work_items   |
+|---:|:--------------|:-------------|:----------------------------------------------------------------------------------------------------------------------------|:----------------|:----------------------------------------------------|:-------------|
+|  0 | 01/30/20      | vc_app       | Remade menu componet for what will be one every scree. Recentered Options from menu dropbox, and changed remaining colours. | 0 days 00:05:00 | 19 files changed, 335 insertions(+), 1 deletions(-) |              |
