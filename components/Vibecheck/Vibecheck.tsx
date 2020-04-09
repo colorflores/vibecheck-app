@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, TouchableOpacity, Image, ScrollView, Text, Alert, Share, Keyboard } from 'react-native';
+import { View, TextInput, TouchableOpacity, Image, ScrollView, Text, Alert, Share, Keyboard, KeyboardAvoidingView } from 'react-native';
 import { VibecheckInterfaceProps, VibecheckInterfaceState } from '../../interfaces/Vibecheck.interface';
 import generalStyles from '../../styles/generalStyles';
 import vibeCheckStyles from './Vibecheck.styles';
